@@ -93,12 +93,12 @@ function Login(){
 
                 <div className="login-body">
                     <div class="form-group">
-                        <input type="email" class="form-control" id="input-email" onChange={handleEmail} required/>
-                        <label for="input-email">Email</label>
+                        <input type="email" class="form-control" id="input-email" onChange={handleEmail} placeholder=' ' autocomplete='off' required/>
+                        <label className= "form-label" for="input-email">Email</label>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="input-password" onChange={handlePassword} required/>
-                        <label for="input-password">Password</label>
+                        <input type="password" class="form-control" id="input-password" onChange={handlePassword} placeholder=' ' autocomplete='off' required/>
+                        <label className= "form-label" for="input-password">Password</label>
                     </div>
                     <Button className="btn btn-dark" onClick={()=> {handleLogin()}} >Login</Button>
                     <div className="d-flex">

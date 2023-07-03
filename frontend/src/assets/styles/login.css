@@ -53,20 +53,25 @@ img {
 label {
     color: var(--dark-gray);
     position: absolute;
-    top: .6rem;
+    top: .4rem;
     left: 1rem;
     transition: all .1s ease-in-out;
     cursor: text;
 }
 
   
-:focus + label {
+:focus + label, .form-control:focus + .form-label, .form-control:not(:placeholder-shown) + .form-label {
     color: var(--dark-blue);
     top: -.9rem;
     background: white;
     padding-left: 5px;
     padding-right: 5px;
 }
+.form-control:not(:focus) + .form-label
+{
+    color: var(--bg-color); 
+}
+
 
 .form-control:focus{
     border-color: var(--dark-blue);
@@ -75,8 +80,13 @@ label {
     background-color: white;
 }
 
-input:valid {
-    accent-color:  white;
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 
