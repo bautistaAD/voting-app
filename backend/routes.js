@@ -1,5 +1,5 @@
 import {addMember} from "./controllers/admin-mem-controller.js";
-import {login, checkIfLoggedIn} from "./controllers/login-auth-controller.js";
+import {login, checkIfLoggedIn, userChecker} from "./controllers/login-auth-controller.js";
 
 const setUpRoutes = (app) => {
   //to change
@@ -10,6 +10,7 @@ const setUpRoutes = (app) => {
   app.post("/add-members", addMember);
   app.post("/login", login);
   app.post("/check-if-logged-in", checkIfLoggedIn);
+  app.get("/user-checker", userChecker);
 
 }
 
