@@ -1,11 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+// import App from './App';
+import { createBrowserRouter, RouterProvider, redirect } from 'react-router-dom';
 
+import Login from './pages/login';
+import AdminDashboard from './pages/admin-dashboard';
+import MemberDashboard from './pages/member-dashboard';
+
+const router = createBrowserRouter([
+  {path:'/login', element: <Login/>},
+  {path:'/', element: <Login/>},
+  {path:'/admin-dashboard', element: <AdminDashboard/>},
+  {path:'/member-dashboard', element: <MemberDashboard/>}
+])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 

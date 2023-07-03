@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+:root{
+    --bg-color: #C8D1D6;
+    --dark-blue: #07223E;
+    --light-blue: #55c2c3;
+    --dark-gray: #979A9B;
+
+}
+
+body{
+    background-color: var(--bg-color);
+    font-family: "Poppins";
+}
+
+.container-md{
+    background-color: white;
+    max-width: 400px;
+    padding: 30px;
+    margin-top: 50px;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+.login-body{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btn.btn-dark{
+   background-color: var(--dark-blue);
+   border: 0px;
+   width: 80px;
+}
+
+.btn.btn-dark:hover{
+    background-color: var(--light-blue);
+}
+
+
+::-webkit-input-placeholder {
+    direction: rtl;
+}
+  
+.form-group {
+    position: relative;
+}
+  
+label {
+    color: var(--dark-gray);
+    position: absolute;
+    top: .6rem;
+    left: 1rem;
+    transition: all .1s ease-in-out;
+    cursor: text;
+}
+
+  
+:focus + label {
+    color: var(--dark-blue);
+    top: -.9rem;
+    background: white;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.form-control:focus{
+    border-color: var(--dark-blue);
+    border-width: 2px;
+    box-shadow: none;
+    background-color: white;
+}
+
+input:valid {
+    accent-color:  white;
+}
+
+
+span {
+    color: var(--light-blue);
+}
+
+span:hover{
+    color: var(--dark-blue);
+    text-decoration: underline;
+}
+
+.Toastify__progress-bar--error {
+    background-color: #913434;
+}
