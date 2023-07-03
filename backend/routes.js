@@ -7,10 +7,9 @@ const setUpRoutes = (app) => {
     res.send("API Home");
   });
 
-  app.post("/add-members", addMember);
+  app.post("/add-member", addMember);
   app.post("/login", login);
   app.post("/check-if-logged-in", checkIfLoggedIn);
-  app.get("/user-checker", userChecker);
 
 }
 

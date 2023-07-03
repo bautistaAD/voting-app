@@ -42,7 +42,7 @@ const login = async (req,res) => {
                 const token = jwt.sign(tokenPayLoad, process.env.TOKEN_STRING);
 
                 //return token to the client
-                return res.send({success: true, token, username: user.last_name});
+                return res.send({success: true, token, username: user.email, userType: user.user_type});
             }
         })
     }
@@ -74,23 +74,4 @@ const checkIfLoggedIn = async (req,res) => {
       }
 }
 
-const userChecker = async (req, res) => {
-  const user = await User.findOne({email: req.body.email});
-
-  try{
-    if(user.user_type == "Admin")
-    {
-      return res.send({userType: user.user_type});
-    }
-    else{
-      return res.send({userType: user.user_type});
-    }
-  } 
-  catch (err)
-  {
-    console.log(err);cd
-  }
-
-}
-
-export {login, checkIfLoggedIn, userChecker};
+export {login, checkIfLoggedIn};
