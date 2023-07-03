@@ -74,4 +74,23 @@ const checkIfLoggedIn = async (req,res) => {
       }
 }
 
-export {login, checkIfLoggedIn};
+const userChecker = async (req, res) => {
+  const user = await User.findOne({email: req.body.email});
+
+  try{
+    if(user.user_type == "Admin")
+    {
+      return res.send({userType: user.user_type});
+    }
+    else{
+      return res.send({userType: user.user_type});
+    }
+  } 
+  catch (err)
+  {
+    console.log(err);cd
+  }
+
+}
+
+export {login, checkIfLoggedIn, userChecker};
