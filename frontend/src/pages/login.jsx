@@ -89,22 +89,22 @@ function Login(){
         <>
             <ToastContainer pauseOnHover={false}/>
             <div className='container-md shadow mb-5 bg-body rounded'>
-                <img src={png} class="rounded mx-auto d-block" alt="none"></img>
+                <img src={png} className="rounded mx-auto d-block" alt="none"></img>
 
-                <div className="login-body">
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="input-email" onChange={handleEmail} placeholder=' ' autocomplete='off' required/>
-                        <label className= "form-label" for="input-email">Email</label>
+                <form  className="login-body">
+                    <div className="form-group">
+                        <input type="email" className="form-control" id="input-email" onChange={handleEmail} placeholder=' ' required/>
+                        <label className= "form-label" htmlFor="input-email">Email</label>
                     </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="input-password" onChange={handlePassword} placeholder=' ' autocomplete='off' required/>
-                        <label className= "form-label" for="input-password">Password</label>
+                    <div className="form-group">
+                        <input type="password" className="form-control" id="input-password" autoComplete="off" onChange={handlePassword} placeholder=' ' required/>
+                        <label className= "form-label" htmlFor="input-password">Password</label>
                     </div>
                     <Button className="btn btn-dark" onClick={()=> {handleLogin()}} >Login</Button>
                     <div className="d-flex">
                         <p>Forgot Password?  <span>Reset here.</span></p>
                     </div>
-                </div>
+                </form>
             </div>
         </>
     );
