@@ -1,0 +1,12 @@
+.content{
+    display: flex;
+}
+
+.main-active, .main-inactive {
+    transition: margin-left .2s;
+    padding: 16px;
+  }
+
+.main-active{
+    margin-left: 250px;
+}
