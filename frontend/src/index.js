@@ -5,13 +5,21 @@ import { createBrowserRouter, RouterProvider, redirect } from 'react-router-dom'
 
 import Login from './pages/login';
 import AdminDashboard from './pages/admin-dashboard';
+import AdminAccount from './pages/admin-account';
+import AdminCandidate from './pages/admin-candidate';
+import AdminElection from './pages/admin-election';
+import AdminMember from './pages/admin-member';
 import MemberDashboard from './pages/member-dashboard';
 
 const router = createBrowserRouter([
   {path:'/login', element: <Login/>},
   {path:'/', element: <Login/>},
   {path:'/admin-dashboard', element: <AdminDashboard/>},
-  {path:'/member-dashboard', element: <MemberDashboard/>}
+  {path:'/member-dashboard', element: <MemberDashboard/>},
+  {path:'/admin-candidate', element: <AdminCandidate/>},
+  {path:'/admin-account', element: <AdminAccount/>},
+  {path:'/admin-election', element: <AdminElection/>},
+  {path:'/admin-member', element: <AdminMember/>}
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
