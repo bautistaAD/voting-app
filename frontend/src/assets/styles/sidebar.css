@@ -55,3 +55,8 @@
     place-items: left;
     align-items: center;
 }
+
+#sidetab-active{
+    background-color: var(--side-bar-darker);
+    border-left: 3px solid var(--light-blue);
+}
