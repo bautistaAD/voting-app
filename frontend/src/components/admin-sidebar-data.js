@@ -8,7 +8,7 @@ const AdminSidebarData = [
     {
         tabName: "Dashboard",
         icon: <DashboardOutlinedIcon/>,
-        link: "/admin-dashbaord"
+        link: "/admin-dashboard"
     },
     {
         tabName: "Members",
@@ -21,7 +21,7 @@ const AdminSidebarData = [
         link: "/admin-candidate"
     },
     {
-        tabName: "Elelction",
+        tabName: "Election",
         icon: <BallotOutlinedIcon/>,
         link: "/admin-election"
     },

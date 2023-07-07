@@ -12,9 +12,9 @@ import Cookies from 'universal-cookie';
 
 
 function Navbar(prop) {
-  const displayName = prop.displayName;
+  const displayName = localStorage.getItem("username");
   const setSidebar = prop.setSidebar;
-  let sidebar = prop.sidebar;
+  const sidebar = prop.sidebar;
   const setMain = prop.main;
   const [isLoggedIn, setIsLoggedIn] = useState(true); // Set the initial state to `true`
   const navigate = useNavigate();
