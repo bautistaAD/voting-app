@@ -1,0 +1,76 @@
+:root{
+    --border-color: #979A9B;
+    --light-blue: #55c2c3;
+    --light-gray: #C8D1D6;
+}
+
+.content-account{
+    display: flex;
+}
+
+.account-page-base{
+    width: 90vw;
+    height: 40vh;
+
+    background-color: white;
+    border-top: 3px solid var(--border-color);
+}
+
+.account-page-title{
+    margin: 5px;
+    padding: 5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.account-page-body{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    padding-left: 150px;
+    padding-right: 100px;
+    padding-top: 15px;
+}
+.account-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+}
+
+.main-inactive {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-active{
+    .account-page-base{
+        width:81vw;
+    }
+}
+
+.account-input-title{
+    flex: 30%;
+    display: grid;
+    justify-content: left;
+}
+
+.account-input-field {
+    flex: 70%;
+    display: grid;
+    place-items: left;
+    align-items: center;
+}
+
+.account-btn.btn-dark{
+    background-color: var(--light-blue);
+    border: 0px;
+    width: 80px;
+ }
+ 
+ .account-btn.btn-dark:hover{
+     background-color: var(--light-gray);
+ }
+ 
