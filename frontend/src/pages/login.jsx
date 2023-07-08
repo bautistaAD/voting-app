@@ -46,6 +46,12 @@ function Login(){
         className: 'toast-message',
         theme: "colored"
     });
+
+    const resetInput = () => 
+    {
+        setEmail("");
+        setPassword("");
+    }
     
     function handleLogin() {
 
@@ -64,7 +70,6 @@ function Login(){
 
             if(body.success)
             {   
-                console.log("1")
                 setUserType(body.userType)
                 setIsLoggedIn(true);
                 const cookies = new Cookies();
@@ -78,8 +83,8 @@ function Login(){
             }
             else
             {
-                console.log("2")
                 showToast();
+                resetInput()
             }
 
         })
@@ -94,11 +99,11 @@ function Login(){
 
                 <form  className="login-body">
                     <div className="form-group">
-                        <input type="email" className="form-control" id="input-email" onChange={handleEmail} placeholder=' ' required/>
+                        <input type="email" className="form-control" id="input-email" onChange={handleEmail} placeholder=' ' required value={email}/>
                         <label className= "form-label" htmlFor="input-email">Email</label>
                     </div>
                     <div className="form-group">
-                        <input type="password" className="form-control" id="input-password" autoComplete="off" onChange={handlePassword} placeholder=' ' required/>
+                        <input type="password" className="form-control" id="input-password" autoComplete="off" onChange={handlePassword} placeholder=' ' required value={password}/>
                         <label className= "form-label" htmlFor="input-password">Password</label>
                     </div>
                     <Button className="btn btn-dark" onClick={()=> {handleLogin()}} >Login</Button>
