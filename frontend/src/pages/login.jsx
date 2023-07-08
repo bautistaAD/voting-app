@@ -74,6 +74,7 @@ function Login(){
                     sameSite: false,
                 });
                 localStorage.setItem("username", body.username);
+                localStorage.setItem("email", body.email);
             }
             else
             {

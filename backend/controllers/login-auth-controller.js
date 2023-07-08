@@ -41,7 +41,7 @@ const login = async (req,res) => {
                 const token = jwt.sign(tokenPayLoad, process.env.TOKEN_STRING);
 
                 //return token to the client
-                return res.send({success: true, token, username: user.first_name.toUpperCase(), userType: user.user_type});
+                return res.send({success: true, token, username: user.first_name.toUpperCase(), userType: user.user_type, email: user.email});
             }
         })
     }
