@@ -25,12 +25,13 @@ const addMember = async (req,res) => {
             res.send({success: false});
         }
         else{
-            const {first_name, middle_name, last_name, user_type, email, password} = req.body;
+            const {first_name, middle_name, last_name, student_number, user_type, email, password} = req.body;
             bcrypt.hash(password, 10).then((hash) => {
                 User.create({
                     first_name: first_name,
                     middle_name: middle_name,
                     last_name: last_name,
+                    student_number: student_number,
                     user_type: user_type,
                     email: email,
                     password: hash
