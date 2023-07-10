@@ -1,0 +1,40 @@
+:root{
+    --light-blue: #55c2c3;
+    --hover-blue:   #0EA9AA; 
+    --light-gray: #C8D1D6;
+    --hover-gray: #B9BEC1;
+}
+
+.header-blue-btn.btn-primary{
+    background-color: var(--light-blue);
+    border:0px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.header-blue-btn.btn-primary:hover {
+    background-color: var(--hover-blue);
+}
+
+.header-gray-btn.btn-primary{
+    background-color: var(--light-gray);
+    color: black;
+    border: 0pc;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.header-gray-btn.btn-primary:hover{
+    background-color: var(--hover-gray);
+    color: black;
+}
