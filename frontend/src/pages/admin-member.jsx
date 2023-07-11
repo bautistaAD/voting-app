@@ -11,15 +11,19 @@ import AddIcon from '@mui/icons-material/Add';
 import GetAppIcon from '@mui/icons-material/GetApp';
 // import Modal from "../components/modal";
 import AddMemberModal from "../components/add-member-modal";
+import ImportCSVModal from "../components/import-csv-modal";
 
 
 function AdminMember() {
   const [sidebar, setSidebar] = useState("inactive");
   const [main, setMain] = useState("main-inactive");
-  const [show, setShow] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
+  const [showImport, setShowImport] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleCloseAdd = () => setShowAdd(false);
+  const handleShowAdd = () => setShowAdd(true);
+  const handleCloseImport = () => setShowImport(false);
+  const handleShowImport = () => setShowImport(true);
 
 
   return (
@@ -36,12 +40,14 @@ function AdminMember() {
                   <Search/>
                   {/* add button side */}
                   <div className="add-btn">
-                    <HeaderBtnBlue name={"ADD MEMBER"} icon={AddIcon} onClick={handleShow}/>
-                    <HeaderBtnGray name={"IMPORT"} icon={GetAppIcon}/>
+                    <HeaderBtnBlue name={"ADD MEMBER"} icon={AddIcon} onClick={handleShowAdd}/>
+                    <HeaderBtnGray name={"IMPORT"} icon={GetAppIcon} onClick={handleShowImport}/>
                   </div>
               </div>
               {/* modal */}
-              <AddMemberModal show={show} close={handleClose}/>
+              <AddMemberModal show={showAdd} close={handleCloseAdd}/>
+              <ImportCSVModal show={showImport} close={handleCloseImport}/>
+
             </div>
           </div>
         </div>
