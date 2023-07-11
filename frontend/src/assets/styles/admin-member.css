@@ -1,0 +1,44 @@
+.content-member{
+    display: flex;
+}
+
+.admin-member-page-base{
+    width: 90vw;
+    height: 81vh;
+
+    background-color: white;
+    border-top: 3px solid var(--border-color);
+}
+
+.admin-member-page-title{
+    margin: 5px;
+    padding: 5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.main-inactive {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-active{
+    .admin-member-page-base{
+        width:81vw;
+    }
+}
+
+.admin-member-page-body{
+    padding: 15px;
+}
+/* headers */
+.admin-member-page-header{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.add-btn {
+    display: flex;
+    gap: 10px;
+}

@@ -5,9 +5,10 @@ import "../assets/styles/header-buttons.css";
 const HeaderBtnBlue = (prop) => {
   const btnName = prop.name;
   const Icon = prop.icon;
+  const onClick = prop.onClick;
   return (
     <div> 
-      <Button className="header-blue-btn btn-primary">
+      <Button className="header-blue-btn btn-primary" onClick={onClick}>
         <Icon/>
         {btnName}
       </Button>

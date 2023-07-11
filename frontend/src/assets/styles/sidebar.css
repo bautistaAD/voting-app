@@ -16,7 +16,7 @@
 
     position: fixed;
     overflow-x: hidden;
-    transition: .3s;
+    transition: .3s ease;
     padding-top: 60px;
     
 }
