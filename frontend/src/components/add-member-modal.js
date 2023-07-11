@@ -46,6 +46,15 @@ const AddMemberModal = (prop) => {
       }
     }
 
+    const resetInput = () => {
+        setStudentNumber("");
+        setFname("");
+        setLname("");
+        setMname("");
+        setEmail("");
+        setUserType("");
+    }
+
     const handleAdd = () => {
       fetch('http://localhost:3001/add-member',{
         method: 'POST',
@@ -67,10 +76,12 @@ const AddMemberModal = (prop) => {
         if(body.success)
         {
           showToast(true, body.message)
+          close();
         }
         else
         {
           showToast(false, body.message);
+          resetInput();
         }
       })
     }
@@ -81,12 +92,12 @@ const AddMemberModal = (prop) => {
         <Modal show={show} centered className="modal-container" >
             <Modal.Body className="modal-body">
             <Modal.Title className="modal-title">Add Member</Modal.Title>
-                <ModalTextInput label={"Student Number"} onChange={handleStudNum}/>
-                <ModalTextInput label={"First Name"} onChange={handleFname}/>
-                <ModalTextInput label={"Middle Name"} onChange={handleMname}/>
-                <ModalTextInput label={"Last Name"} onChange={handleLname}/>
-                <ModalTextInput label={"Email"} onChange={handleEmail}/>
-                <SelectInput  label={"Status"} data={data} id={"select-status"} onChange={handleUserType}/>
+                <ModalTextInput label={"Student Number"} onChange={handleStudNum} value={studentNumber}/>
+                <ModalTextInput label={"First Name"} onChange={handleFname} value={fname}/>
+                <ModalTextInput label={"Middle Name"} onChange={handleMname} value={mname}/>
+                <ModalTextInput label={"Last Name"} onChange={handleLname} value={lname}/>
+                <ModalTextInput label={"Email"} onChange={handleEmail} value={email}/>
+                <SelectInput  label={"Status"} data={data} id={"select-status"} onChange={handleUserType} value={userType}/>
                 <ModalButtons name={"Add"} close={close} onClick={handleAdd} inputChecker={inputChecker}/>
             </Modal.Body> 
         </Modal>
