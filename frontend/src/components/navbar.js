@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/navbar.css';
-import 'bootstrap/dist/js/bootstrap.js';
+// import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/js/dist/dropdown';
 import '../assets/styles/sidebar.css'
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
