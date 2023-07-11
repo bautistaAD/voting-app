@@ -3,6 +3,8 @@ import ModalButtons from "./modal-btns";
 import ModalTextInput from "./modal-text-input";
 import SelectInput from "./select-input";
 import { useState } from "react";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from 'react-toastify';
 
 const AddMemberModal = (prop) => {
     const show = prop.show;
@@ -10,27 +12,82 @@ const AddMemberModal = (prop) => {
     const data = ["Candidate", "Non-Candidate"];
     
     const [studentNumber, setStudentNumber] = useState("");
-    const [fname, setfname] =useState("");
-    const [mname, setmname] = useState("");
-    const [lname, setlname] =useState("");
-    const [email, setemail] = useState("");
+    const [fname, setFname] =useState("");
+    const [mname, setMname] = useState("");
+    const [lname, setLname] =useState("");
+    const [email, setEmail] = useState("");
+    const [userType, setUserType] = useState("");
     const password = "temp" + studentNumber;
 
-    
+    const inputChecker = studentNumber === "" || fname === "" || lname === "" || email === "" || userType === "";
 
+    const handleStudNum = (e) => setStudentNumber(e.target.value);
+    const handleFname = (e) => setFname(e.target.value);
+    const handleMname = (e) => setMname(e.target.value);
+    const handleLname = (e) => setLname(e.target.value);
+    const handleEmail = (e) => setEmail(e.target.value);
+    const handleUserType = (e) => setUserType(e.target.value);
+
+    const showToast = (success, message) => {
+      if(success)
+      {
+        toast.success(message, {
+          className: 'toast-nessage',
+          theme: "colored"
+        })
+      }
+      else
+      {
+        toast.error(message, {
+          className: 'toast-nessage',
+          theme: "colored"
+        })
+
+      }
+    }
+
+    const handleAdd = () => {
+      fetch('http://localhost:3001/add-member',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          student_number: studentNumber,
+          first_name: fname,
+          middle_name: mname,
+          last_name: lname,
+          email: email.toLowerCase(),
+          user_type: userType,
+          password: password
+        })
+      })
+      .then((response) => response.json())
+      .then((body) => {
+        if(body.success)
+        {
+          showToast(true, body.message)
+        }
+        else
+        {
+          showToast(false, body.message);
+        }
+      })
+    }
 
   return (
-    <div>
+    <div className="add-member-modal">
+        <ToastContainer/>
         <Modal show={show} centered className="modal-container" >
             <Modal.Body className="modal-body">
             <Modal.Title className="modal-title">Add Member</Modal.Title>
-                <ModalTextInput label={"Student Number"}/>
-                <ModalTextInput label={"First Name"}/>
-                <ModalTextInput label={"Middle Name"}/>
-                <ModalTextInput label={"Last Name"}/>
-                <ModalTextInput label={"Email"}/>
-                <SelectInput  label={"Status"} data={data} id={"select-status"}/>
-                <ModalButtons name={"Add"} close={close}/>
+                <ModalTextInput label={"Student Number"} onChange={handleStudNum}/>
+                <ModalTextInput label={"First Name"} onChange={handleFname}/>
+                <ModalTextInput label={"Middle Name"} onChange={handleMname}/>
+                <ModalTextInput label={"Last Name"} onChange={handleLname}/>
+                <ModalTextInput label={"Email"} onChange={handleEmail}/>
+                <SelectInput  label={"Status"} data={data} id={"select-status"} onChange={handleUserType}/>
+                <ModalButtons name={"Add"} close={close} onClick={handleAdd} inputChecker={inputChecker}/>
             </Modal.Body> 
         </Modal>
     </div>

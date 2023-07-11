@@ -7,7 +7,7 @@ const ModalTextInput = (prop) => {
     <div className='modal-input'>
         <div className='modal-label'>{label}</div>
         <div className='form-group'>
-            <input type="text" className='form-control' />
+            <input type="text" className='form-control' onChange={onChange}/>
         </div>
     </div>
   )
