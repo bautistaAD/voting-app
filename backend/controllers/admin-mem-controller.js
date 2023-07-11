@@ -65,7 +65,7 @@ const addMember = async (req,res) => {
     ///check if email is already exisiting
     if(emailChecker)
     {
-        return res.send({emailExist: true});
+        return res.send({success: false, message: "Email Already Exists"});
     }
     else
     {
@@ -86,11 +86,11 @@ const addMember = async (req,res) => {
                     password: hash
                 })
                 .then(() => {
-                    res.send({success: true});
+                    res.send({success: true, meesage: "Added Successfully!"});
                 })
                 .catch((err) =>{
                     if (err){
-                        res.send({success: false});
+                        res.send({success: false, message: "An Error Occured"});
                         console.log(err);
                     }
                 })
