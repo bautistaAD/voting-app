@@ -1,0 +1,67 @@
+:root{
+    --cancel-btn: #C8D1D6;
+    --light-blue: #55c2c3;
+    --dark-gray: #979A9B;
+    --hover-blue:   #0EA9AA; 
+    --hover-gray: #B9BEC1;
+}
+
+.modal-btns {
+    display: flex;
+    float: right;
+    gap: 10px;
+}
+
+.modal-body{
+    padding: 20px;
+}
+
+.modal-label {
+    color: black;
+    font-size: 15px;
+    padding-left: 5px;
+    top: -0.1rem;
+}
+
+.modal-input, .select-input{
+   padding-bottom: 10px; 
+}
+
+.modal-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.modal-input>.form-group>.form-control:focus, .select-input>.form-select:focus {
+    border: 1px solid black;
+    box-shadow:none ;
+    
+}
+
+.modal-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 85px;
+    height: 30px;
+}
+
+#modal-cancel-btn {
+    border: 0px;
+    background-color: var(--cancel-btn);
+    color: var(--dark-gray);
+}
+
+#modal-cancel-btn:hover{
+    background-color: var(--hover-gray);
+}
+
+#modal-submit-btn {
+    border: 0px;
+    background-color: var(--light-blue);
+}
+
+#modal-submit-btn:hover{
+    background-color: var(--hover-blue);
+}
