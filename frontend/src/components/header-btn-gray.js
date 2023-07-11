@@ -4,9 +4,10 @@ import "../assets/styles/header-buttons.css";
 const HeaderBtnGray = (prop) => {
   const btnName = prop.name;
   const Icon = prop.icon;
+  const onClick = prop.onClick;
   return (
     <div> 
-      <Button className="header-gray-btn btn-primary">
+      <Button className="header-gray-btn btn-primary" onClick={onClick}>
         <Icon/>
         {btnName}
       </Button>
