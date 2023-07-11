@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 const User = mongoose.model("User", UserSchema);
 
 const importCSV = async (req,res) => {
-    const members = req.body;
+    const members = req.body.data;
 
     //function for validating email format
     function matchRegex(email){
@@ -71,7 +71,7 @@ const addMember = async (req,res) => {
     {
         //check if follows email format
         if(!matchRegex(req.body.email.toLowerCase())){
-            res.send({success: false});
+            res.send({success: false, message: "Invalid Email"});
         }
         else{
             const {first_name, middle_name, last_name, student_number, user_type, email, password} = req.body;
@@ -86,7 +86,7 @@ const addMember = async (req,res) => {
                     password: hash
                 })
                 .then(() => {
-                    res.send({success: true, meesage: "Added Successfully!"});
+                    res.send({success: true, message: "Added Successfully!"});
                 })
                 .catch((err) =>{
                     if (err){
