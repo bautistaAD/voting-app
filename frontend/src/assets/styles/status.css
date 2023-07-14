@@ -1,0 +1,28 @@
+.member-status{
+    border-radius: 10px;
+    border: 1px solid black;
+    width: fit-content;
+    height: 30px;
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+}
+
+.member-status> .rounded-circle {
+    display: flex;
+    align-items: center;
+
+    margin-right: 10px;
+    width: 10px;
+    height: 10px;
+
+}
+
+.status-name{
+    flex: 70%;
+    display: grid;
+    place-items: left;
+    align-items: center;
+    font-size: 11px;
+}

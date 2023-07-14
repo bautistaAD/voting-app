@@ -12,6 +12,8 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 // import Modal from "../components/modal";
 import AddMemberModal from "../components/add-member-modal";
 import ImportCSVModal from "../components/import-csv-modal";
+import MembersTable from "../components/members-table";
+
 
 
 function AdminMember() {
@@ -44,10 +46,10 @@ function AdminMember() {
                     <HeaderBtnGray name={"IMPORT"} icon={GetAppIcon} onClick={handleShowImport}/>
                   </div>
               </div>
+              <MembersTable/>
               {/* modal */}
               <AddMemberModal show={showAdd} close={handleCloseAdd}/>
               <ImportCSVModal show={showImport} close={handleCloseImport}/>
-
             </div>
           </div>
         </div>
