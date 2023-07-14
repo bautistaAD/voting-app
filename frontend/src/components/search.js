@@ -1,6 +1,8 @@
 import 'bootstrap/js/dist/dropdown';
 import "../assets/styles/search.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchIcon from '@mui/icons-material/Search';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 const Search = () => {
   return (
@@ -11,9 +13,10 @@ const Search = () => {
                 <input type="text" id="search" className="search-input" placeholder="Search"/>
             </div>
 
-            <div class="btn-group">
-              <button type="button" class="btn btn-danger" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Action
+            <div className="filter-btn">
+              <button type="button" className="btn btn-primary" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <FilterAltIcon/>
+                Filter
               </button>
               <div class="dropdown-menu">
                 <option class="dropdown-item" >Action</option>
