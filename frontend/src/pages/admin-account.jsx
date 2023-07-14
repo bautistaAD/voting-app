@@ -3,7 +3,7 @@ import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import AdminSidebarData from "../components/admin-sidebar-data";
 import "../assets/styles/admin-account.css";
-import AccountInput from "../components/account-input";
+import AccountInput from "../components/inputs/account-input";
 import { Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +11,7 @@ import {ToastContainer, toast} from 'react-toastify';
 
 function AdminAccount() {
   const email = localStorage.getItem("email");
-  const displayName = localStorage.getItem("username");
+  // const displayName = localStorage.getItem("username");
 
   const [sidebar, setSidebar] = useState("inactive");
   const [main, setMain] = useState("main-inactive");

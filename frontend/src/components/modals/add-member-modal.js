@@ -1,7 +1,7 @@
-import { Modal, Button } from "react-bootstrap"
-import ModalButtons from "./modal-btns";
-import ModalTextInput from "./modal-text-input";
-import SelectInput from "./select-input";
+import { Modal } from "react-bootstrap"
+import ModalButtons from "../buttons/modal-btns";
+import ModalTextInput from "../inputs/modal-text-input";
+import SelectInput from "../inputs/select-input";
 import { useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer, toast} from 'react-toastify';

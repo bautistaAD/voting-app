@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
-import "../assets/styles/header-buttons.css";
+import "../../assets/styles/header-buttons.css";
 
 const HeaderBtnBlue = (prop) => {
   const btnName = prop.name;

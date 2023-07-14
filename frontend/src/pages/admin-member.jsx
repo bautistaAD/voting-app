@@ -2,16 +2,15 @@ import { useState } from "react";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import AdminSidebarData from "../components/admin-sidebar-data";
-import { Button } from "react-bootstrap";
 import '../assets/styles/admin-member.css'
 import Search from "../components/search";
-import HeaderBtnBlue from "../components/header-btn-blue";
-import HeaderBtnGray from "../components/header-btn-gray";
+import HeaderBtnBlue from "../components/buttons/header-btn-blue";
+import HeaderBtnGray from "../components/buttons/header-btn-gray";
 import AddIcon from '@mui/icons-material/Add';
 import GetAppIcon from '@mui/icons-material/GetApp';
 // import Modal from "../components/modal";
-import AddMemberModal from "../components/add-member-modal";
-import ImportCSVModal from "../components/import-csv-modal";
+import AddMemberModal from "../components/modals/add-member-modal";
+import ImportCSVModal from "../components/modals/import-csv-modal";
 import MembersTable from "../components/members-table.js";
 
 

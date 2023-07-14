@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap"
-import "../assets/styles/modal.css"
+import "../../assets/styles/modal.css"
 
 const ModalButtons = (prop) => {
     const btnName = prop.name;

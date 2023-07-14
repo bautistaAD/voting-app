@@ -1,5 +1,5 @@
-import { Modal, Button } from "react-bootstrap"
-import ModalButtons from "./modal-btns";
+import { Modal} from "react-bootstrap"
+import ModalButtons from "../buttons/modal-btns";
 import { useState, useEffect } from "react";
 import Papa from "papaparse";
 import 'react-toastify/dist/ReactToastify.css';
