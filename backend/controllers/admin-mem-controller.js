@@ -125,4 +125,54 @@ const getAllMembers = async (req, res) => {
     res.send(members);
 }
 
-export {addMember, importCSV, getAllMembers};
+const editMember = async (req, res) => {
+    try{
+        const editMember = await User.findOne({email: req.body.email});
+
+        editMember.first_name = req.body.first_name;
+        editMember.middle_name = req.body.middle_name;
+        editMember.last_name = req.body.last_name;
+        editMember.user_type = req.body.user_type;
+
+        await editMember.save();
+        res.send({success: true, message: "Saved changes"});
+    }
+    catch(err)
+    {
+        console.log(err);
+        res.send({success: false, message: "An error occured"});
+    }
+}
+
+const deleteMember = async (req, res) => {
+    try
+    {
+       const delMem = await User.findOne({email: req.body.email});
+       const deleteResult = await User.deleteOne({"email": req.body.email});
+
+        if (deleteResult.deletedCount == 1) 
+        {
+        res.send({ success: true, message: "Deleted successfully"})
+        } 
+        else 
+        { 
+        res.send({ success: false, message: "An error occured" })
+        }
+
+    //    if(delMem.user_type === "Candidate")
+    //    {
+    //         //also remove it to the candidate collection
+    //    }
+    //    else
+    //    {
+    //         //else delete
+    //    }
+        
+    }
+    catch(err)
+    {   console.log(err);
+        res.send({ success: false, message: "An error occured" })
+    }
+}
+
+export {addMember, importCSV, getAllMembers, editMember, deleteMember};

@@ -12,7 +12,7 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 // import Modal from "../components/modal";
 import AddMemberModal from "../components/add-member-modal";
 import ImportCSVModal from "../components/import-csv-modal";
-import MembersTable from "../components/members-table";
+import MembersTable from "../components/members-table.js";
 
 
 

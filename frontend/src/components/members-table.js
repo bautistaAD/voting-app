@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import Status from './status';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import {ToastContainer, toast} from 'react-toastify';
 
 const MembersTable = () => {
   const [members, setMembers] = useState([]);
@@ -18,6 +19,41 @@ const MembersTable = () => {
       });
   })
 
+  const showToast = (success, message) => {
+    if(success)
+    {
+      toast.success(message, {
+        className: 'toast-nessage',
+        theme: "colored"
+      })
+    }
+    else
+    {
+      toast.error(message, {
+        className: 'toast-nessage',
+        theme: "colored"
+      })
+
+    }
+  }
+  
+
+  const handleDelete = (email) => {
+    fetch('http://localhost:3001/delete-member', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email
+      })
+    })
+    .then((response) => response.json())
+    .then((body) => {
+        showToast(body.success, body.message);
+    })
+  }
+
 
   const renderButton = (cell, row, rowIndex, formatExtraData) => {
     return (
@@ -25,7 +61,7 @@ const MembersTable = () => {
         <button className="btn btn-primary d-flex align-items-center justify-content-center" style={{width: "80px", height: "30px"}}>
           Edit
         </button>
-        <button className="btn btn-danger d-flex align-items-center justify-content-center" style={{width: "80px", height: "30px"}}>
+        <button className="btn btn-danger d-flex align-items-center justify-content-center" style={{width: "80px", height: "30px"}} onClick={()=> {handleDelete(row.email)}}>
           Delete
         </button>
       </div>
