@@ -4,7 +4,7 @@
 
 .admin-member-page-base{
     width: 90vw;
-    height: 81vh;
+    height: auto;
 
     background-color: white;
     border-top: 3px solid var(--border-color);
@@ -45,6 +45,25 @@
     gap: 10px;
 }
 
+/*table*/
 td {
     word-break: break-word;
   }
+
+.th {
+    width: fit-content;
+    display: flex;
+    
+}
+
+.caret-asc, .caret, .caret-desc{
+    float: right;
+}
+
+.react-bootstrap-table-pagination-total{
+    color: black;
+}
+
+.react-bootstrap-table-page-btns-ul>.page-item>.page-link{
+    color: #7F7F7F;
+}
