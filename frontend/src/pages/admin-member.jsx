@@ -11,7 +11,7 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 // import Modal from "../components/modal";
 import AddMemberModal from "../components/modals/add-member-modal";
 import ImportCSVModal from "../components/modals/import-csv-modal";
-import MembersTable from "../components/members-table.js";
+import MembersTable from "../components/tables/members-table";
 
 
 

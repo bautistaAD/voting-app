@@ -1,14 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 //import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
-import '../assets/styles/admin-member.css'
+import '../../assets/styles/admin-member.css'
 import BootstrapTable from 'react-bootstrap-table-next';
 import { useState, useEffect } from 'react';
-import Status from './status';
+import Status from '../status';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {ToastContainer, toast} from 'react-toastify';
-import EditMemberModal from "./modals/edit-member-modal";
+import EditMemberModal from "../modals/edit-member-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
