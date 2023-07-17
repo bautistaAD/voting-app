@@ -2,7 +2,7 @@
     display: flex;
 }
 
-.admin-member-page-base{
+.admin-page-base{
     width: 90vw;
     height: auto;
 
@@ -10,7 +10,7 @@
     border-top: 3px solid var(--border-color);
 }
 
-.admin-member-page-title{
+.admin-page-title{
     margin: 5px;
     padding: 5px;
     border-bottom: 1px solid var(--border-color);
@@ -28,13 +28,13 @@
     }
 }
 
-.admin-member-page-body{
+.admin-page-body{
     padding: 15px;
     display: flex;
     flex-direction: column;
 }
 /* headers */
-.admin-member-page-header{
+.admin-page-header{
     display: flex;
     justify-content: space-between;
 

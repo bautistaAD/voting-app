@@ -14,10 +14,9 @@ const EditMemberModal = (prop) => {
     const [fname, setFname] =useState("");
     const [mname, setMname] = useState("");
     const [lname, setLname] =useState("");
-    const [email, setEmail] = useState("");
     const [userType, setUserType] = useState("");
 
-    const inputChecker = fname === "" || lname === "" || email === "" || userType === "";
+    const inputChecker = fname === "" || lname === "" || mname === "" || userType === "";
 
     const handleFname = (e) => setFname(e.target.value);
     const handleMname = (e) => setMname(e.target.value);
