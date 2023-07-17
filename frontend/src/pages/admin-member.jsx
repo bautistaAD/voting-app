@@ -32,11 +32,11 @@ function AdminMember() {
       <Navbar setSidebar={setSidebar} sidebar={sidebar} main={setMain} />
       <div className="content-member">
         <Sidebar sidebar={sidebar} sideData={AdminSidebarData}></Sidebar>
-        <div className={main} id="admin-member-main" style={{ marginTop: "60px" }}>
-          <div className="admin-member-page-base shadow mb-5 bg-body rounded">
-            <div className="admin-member-page-title">Manage Members</div>
-            <div className="admin-member-page-body">
-              <div className="admin-member-page-header">
+        <div className={main} id="admin-main" style={{ marginTop: "60px" }}>
+          <div className="admin-page-base shadow mb-5 bg-body rounded">
+            <div className="admin-page-title">Manage Members</div>
+            <div className="admin-page-body">
+              <div className="admin-page-header">
                 {/* search inpput side */}
                   <Search/>
                   {/* add button side */}
