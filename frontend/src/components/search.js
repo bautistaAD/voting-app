@@ -18,10 +18,10 @@ const Search = () => {
                 <FilterAltIcon/>
                 Filter
               </button>
-              <div class="dropdown-menu">
-                <option class="dropdown-item" >Action</option>
-                <option class="dropdown-item" >Another action</option>
-                <option class="dropdown-item" >Something else here</option>
+              <div className="dropdown-menu">
+                <option className="dropdown-item" >Action</option>
+                <option className="dropdown-item" >Another action</option>
+                <option className="dropdown-item" >Something else here</option>
               </div>
             </div>
 
