@@ -8,15 +8,24 @@ const addElection = async (req,res) => {
     {
         const {election_name, start_date_time, end_date_time, is_results_open} = req.body;
 
-        const newElection = new Election({
-            election_name: election_name.toLowerCase(),
-            start_date_time: new Date(start_date_time),
-            end_date_time: new Date(end_date_time),
-            is_results_open: is_results_open
-        });
+        const electionChecker = await Election.findOne({election_name: election_name});
 
-        await newElection.save();
-        res.send({success: true, message: "Added Successfully!"});
+        if(!electionChecker)
+        {
+            const newElection = new Election({
+                election_name: election_name.toLowerCase(),
+                start_date_time: new Date(start_date_time),
+                end_date_time: new Date(end_date_time),
+                is_results_open: is_results_open
+            });
+    
+            await newElection.save();
+            res.send({success: true, message: "Added Successfully!"});
+        }
+        else
+        {
+            res.send({success: false, message: "Election name already exist!"});
+        }
     }
     catch(err)
     {
