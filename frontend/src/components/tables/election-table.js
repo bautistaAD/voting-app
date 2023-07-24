@@ -14,7 +14,6 @@ import {useNavigate } from 'react-router-dom';
 
 const ElectionTable = () => {
   const [elections, setElections] = useState([]);
-  const [showEdit, setEdit] = useState(false); //modal
   const navigate = useNavigate();
 
   //renders updated members in database
@@ -26,8 +25,6 @@ const ElectionTable = () => {
       });
   }); // <-- Add an empty dependency array here
 
-  const showEditModal = () => setEdit(true);
-  const closeEditModal = () => setEdit(false);
 
   const caret = (order) => {
     if (!order) 
@@ -74,9 +71,6 @@ const ElectionTable = () => {
     }
   }
 
-  const handleView = (status) => {
-    console.log(status);
-  }
 
   //button for the table
   const renderButton = (cell, row, rowIndex, formatExtraData) => {
@@ -86,7 +80,7 @@ const ElectionTable = () => {
     return (
       <div className="d-flex justify-content-evenly">
         {/* onClick={showEditModal} */}
-        <button className="btn btn-success d-flex align-items-center justify-content-center" style={{width: "fit-content", height: "30px"}} 
+        <button className="btn btn-success d-flex align-items-center justify-content-center" style={{width: "fit-content", height: "30px", fontSize:"1vw"}} 
         onClick={()=> {navigate(`/election-details/${row.election_name}`, {state: {status: status}})}} >
          View Details
         </button>

@@ -11,6 +11,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Status from '../components/status';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import PositionTable from '../components/tables/position-table';
 
 const ElectionDetails = () => {
     const [sidebar, setSidebar] = useState("inactive");
@@ -69,7 +70,7 @@ const ElectionDetails = () => {
                             <p className='date-label'>Opening Date</p>
                             <p className='date-data'>{new Date(details.start_date_time).toLocaleDateString()}</p>
                           </div>
-                          <div className='open-time'>s
+                          <div className='open-time'>
                             <p className='time-label'>Opening Time</p>
                             <p className='time-data'>{new Date(details.start_date_time).toLocaleTimeString()}</p>
                           </div>
@@ -87,7 +88,7 @@ const ElectionDetails = () => {
                   </div>
 
                 </div>
-                {/* <ElectionTable/> */}
+                <PositionTable/>
                 {/* modal */}
                 {/* <AddElectionModal show={showAddElection} close={closeElectionModal} toast={showToast}/> */}
 

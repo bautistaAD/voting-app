@@ -1,6 +1,6 @@
 :root{
-    --light-gray: #7F7F7F;
-    --dark-gray: #979A9B;
+    --dark-gray: #7F7F7F;
+    --light-gray: #979A9B;
     --red: #F25656;
     --light-blue: #55c2c3;
 }
@@ -52,6 +52,7 @@
 }
 #election-details-edit, #election-details-delete{
     color: var(--dark-gray);
+    cursor: pointer;
 }
 
 #election-details-delete:hover{
@@ -75,5 +76,30 @@
 
 .date-label, .time-label {
     color: var(--dark-gray)
+}
+
+/*Position Table*/
+.position-table-base{
+    border: 2px solid var(--dark-gray);
+    padding: 10px;
+    margin: 0px !important;
+    margin-top: 15px !important;
+}
+
+.position-table-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    border-bottom: 2px solid var(--dark-gray);
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.position-table-header>p{
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0%;
 }
 
