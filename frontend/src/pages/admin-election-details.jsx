@@ -69,7 +69,7 @@ const ElectionDetails = () => {
                             <p className='date-label'>Opening Date</p>
                             <p className='date-data'>{new Date(details.start_date_time).toLocaleDateString()}</p>
                           </div>
-                          <div className='open-time'>s
+                          <div className='open-time'>
                             <p className='time-label'>Opening Time</p>
                             <p className='time-data'>{new Date(details.start_date_time).toLocaleTimeString()}</p>
                           </div>
