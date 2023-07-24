@@ -1,3 +1,79 @@
+:root{
+    --light-gray: #7F7F7F;
+    --dark-gray: #979A9B;
+    --red: #F25656;
+    --light-blue: #55c2c3;
+}
+
 .content-election{
     display: flex;
 }
+
+.back-btn{
+    color: #8C9396;
+    margin-bottom: 5px;
+    align-items:start !important;
+    cursor: pointer;
+}
+
+.back-btn:hover{
+    transition: 0.3s ease;
+    transform: translateX(-3px) translateY(2px);
+    color: white
+}
+
+.main-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.admin-page-header#election-details{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.election-title-left>h3{
+    margin: 0%;
+    font-weight: bolder;
+}
+
+.election-title-left{
+    display: flex;
+    gap: 15px;
+}
+
+.election-title{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#election-details-edit, #election-details-delete{
+    color: var(--dark-gray);
+}
+
+#election-details-delete:hover{
+    color: var(--red);
+}
+
+#election-details-edit:hover{
+    color: var(--light-blue);
+}
+
+.time-date-data{
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.date-label, .date-data, .time-label, .time-data{
+    margin: 0px;
+}
+
+.date-label, .time-label {
+    color: var(--dark-gray)
+}
+

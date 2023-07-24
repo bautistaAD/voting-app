@@ -10,6 +10,7 @@ import AdminCandidate from './pages/admin-candidate';
 import AdminElection from './pages/admin-election';
 import AdminMember from './pages/admin-member';
 import MemberDashboard from './pages/member-dashboard';
+import ElectionDetails from './pages/admin-election-details';
 
 const router = createBrowserRouter([
   {path:'/login', element: <Login/>},
@@ -19,7 +20,8 @@ const router = createBrowserRouter([
   {path:'/admin-candidate', element: <AdminCandidate/>},
   {path:'/admin-account', element: <AdminAccount/>},
   {path:'/admin-election', element: <AdminElection/>},
-  {path:'/admin-member', element: <AdminMember/>}
+  {path:'/admin-member', element: <AdminMember/>},
+  {path: '/election-details/:name', element: <ElectionDetails/>}
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

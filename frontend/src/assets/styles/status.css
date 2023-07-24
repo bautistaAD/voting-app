@@ -1,4 +1,4 @@
-.member-status{
+.member-status, .election-status{
     border-radius: 10px;
     border: 1px solid black;
     width: fit-content;
@@ -9,7 +9,18 @@
     align-items: center;
 }
 
-.member-status> .rounded-circle {
+.election-details-status{
+    border-radius: 10px;
+    border: 1px solid black;
+    width: fit-content;
+    height: 30px;
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+}
+
+.member-status> .rounded-circle, .election-status> .rounded-circle {
     display: flex;
     align-items: center;
 
@@ -17,6 +28,15 @@
     width: 10px;
     height: 10px;
 
+}
+
+.election-details-status> .rounded-circle{
+    display: flex;
+    align-items: center;
+
+    margin-right: 10px;
+    width: 10px;
+    height: 10px;
 }
 
 .status-name{
