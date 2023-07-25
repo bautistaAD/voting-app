@@ -1,25 +1,43 @@
 import HeaderBtnGray from "../buttons/header-btn-gray";
 import AddIcon from '@mui/icons-material/Add';
 import AddPositionModal from "../modals/add-position-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
 
-const PositionTable = () => {
+const PositionTable = (prop) => {
+    const electionId = prop.elecID;
     const [addModal, setAddModal] = useState(false);
+    const [positions, setPositions] = useState([]);
 
     const showAddModal = () => setAddModal(true);
     const closeAddModal =() => setAddModal(false)
 
-    const tempPositionData = [{
-        position_name: "Executive Head Developer",
-        election_id: "64b8d042cdfaae00e7977ffa"},
-        {
-        position_name: "Membership Affairs Head Developer",
-        election_id: "64b8d042cdfaae00e7977ffa"}
+    // const tempPositionData = [{
+    //     position_name: "Executive Head Developer",
+    //     election_id: "64b8d042cdfaae00e7977ffa"},
+    //     {
+    //     position_name: "Membership Affairs Head Developer",
+    //     election_id: "64b8d042cdfaae00e7977ffa"}
 
-    ];
+    // ];
+
+    useEffect(() => {
+      fetch('http://localhost:3001/get-positions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          election_id: electionId
+        })
+      })
+      .then(response => response.json())
+      .then(body => {
+        setPositions(body)
+      });
+    })
   
-     //button for the table
+  //button for the table
   const renderButton = (cell, row, rowIndex, formatExtraData) => {
     return (
       <div className="d-flex flex-wrap gap-3 justify-content-end">
@@ -47,14 +65,22 @@ const PositionTable = () => {
     {dataField: 'action', text: 'Actions',headerAttrs: {hidden: true}, formatter: renderButton, formatExtraData: null}
 ]
 
+const emptyDataMessage = () => {
+  return(
+    <div className="d-flex justify-content-evenly align-items-center">
+      <p className="m-0 text-secondary" >No Data</p>
+    </div>
+  )
+};
+
   return (
     <div className='position-table-base mb-5 bg-body rounded'>
         <div className='position-table-header'>
             <p className='position-table-title'>Position</p>
             <HeaderBtnGray name="ADD" icon={AddIcon} onClick={showAddModal}/>
         </div>
-         <BootstrapTable keyField='position_name' columns={columns} data={tempPositionData} striped={true} bootstrap4={true} bordered={false}/> 
-        <AddPositionModal show={addModal} close={closeAddModal}/>
+         <BootstrapTable keyField='position_name' columns={columns} data={positions} striped={true} bootstrap4={true} bordered={false} noDataIndication={emptyDataMessage}/> 
+        <AddPositionModal show={addModal} close={closeAddModal} elecID={electionId}/>
     </div>
   )
 }

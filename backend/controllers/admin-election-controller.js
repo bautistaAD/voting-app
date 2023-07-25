@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 import {ElectionSchema } from "../models/election.js";
+import {PositionSchema } from "../models/position.js";
 
 const Election = mongoose.model("Election", ElectionSchema);
+const Position = mongoose.model("Position", PositionSchema );
 
 const addElection = async (req,res) => {
     try
@@ -60,4 +62,46 @@ const getElectionByName = async (req,res) => {
     }
 }
 
-export {addElection, getElections, getElectionByName};
+const addPosition = async (req,res) => {
+    try
+    {
+        const {position_name, election_id} = req.body;
+        
+        const positionChecker = await Position.findOne({position_name: position_name, election_id: election_id});
+        
+        if(!positionChecker)
+        {
+            const newPosition = new Position({
+                position_name: position_name.toLowerCase(),
+                election_id: election_id
+            });
+
+            await newPosition.save();
+            res.send({success: true, message: "Added Successfully!"});
+        }
+        else
+        {
+            console.log(positionChecker)
+            res.send({success: false, message: "Position name already exist!"});
+        }
+    }
+    catch(err)
+    {
+        console.log(err)
+        res.send({success: false, message: "An error occured"});
+    }
+}
+
+const getPositions = async (req,res) => {
+    try
+    {
+        const positions = await Position.find({election_id: req.body.election_id});
+        res.send(positions);
+    }
+    catch(err)
+    {
+        console.log(err)
+    }
+}
+
+export {addElection, getElections, getElectionByName, addPosition, getPositions};

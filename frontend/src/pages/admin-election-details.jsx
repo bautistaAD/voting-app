@@ -88,7 +88,7 @@ const ElectionDetails = () => {
                   </div>
 
                 </div>
-                <PositionTable/>
+                <PositionTable elecID={details._id}/>
                 {/* modal */}
                 {/* <AddElectionModal show={showAddElection} close={closeElectionModal} toast={showToast}/> */}
 
