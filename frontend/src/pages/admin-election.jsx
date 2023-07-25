@@ -92,7 +92,7 @@ function AdminElection() {
               </div>
               <ElectionTable data={filteredElection}/>
               {/* modal */}
-              <AddElectionModal show={showAddElection} close={closeElectionModal} toast={showToast} setKey={setKey} key={refreshKey}/>     
+              <AddElectionModal show={showAddElection} close={closeElectionModal} toast={showToast} setKey={setKey} keyValue={refreshKey}/>     
             </div>
           </div>
         </div>

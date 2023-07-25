@@ -11,7 +11,7 @@ const AddElectionModal = (prop) => {
   const close = prop.close;
   const toast = prop.toast;
   const setKey =prop.setKey;
-  const key = prop.key;
+  const key = prop.keyValue;
 
   const [electionName, setElectionName] = useState("");
   const [start, setStart] = useState("");

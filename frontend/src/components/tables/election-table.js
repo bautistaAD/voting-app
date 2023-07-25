@@ -130,7 +130,7 @@ const ElectionTable = (prop) => {
     // ....
     return (
 
-      <li className="page-item">
+      <li key={Math.random()} className="page-item">
         <a href="#"  onClick={ handleClick } className="page-link">{ page }</a>
       </li>
     );
