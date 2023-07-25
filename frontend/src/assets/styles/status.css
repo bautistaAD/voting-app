@@ -1,12 +1,16 @@
 .member-status, .election-status{
     border-radius: 10px;
     border: 1px solid black;
-    width: fit-content;
+    width: 100px;
     height: 30px;
     padding: 10px;
 
     display: flex;
     align-items: center;
+}
+
+.member-status {
+    width: fit-content !important;
 }
 
 .election-details-status{
@@ -18,6 +22,11 @@
 
     display: flex;
     align-items: center;
+}
+
+.election-details-status>.status-name{
+    
+    font-size: 20px;
 }
 
 .member-status> .rounded-circle, .election-status> .rounded-circle {
@@ -45,4 +54,5 @@
     place-items: left;
     align-items: center;
     font-size: 11px;
+    justify-content: center;
 }

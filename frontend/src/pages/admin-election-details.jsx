@@ -11,6 +11,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Status from '../components/status';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import PositionTable from '../components/tables/position-table';
 
 const ElectionDetails = () => {
     const [sidebar, setSidebar] = useState("inactive");
@@ -52,7 +53,7 @@ const ElectionDetails = () => {
                   <div className='election-title'>
                     <div className='election-title-left'>
                       <h3>{nameDisplay}</h3>
-                      <Status className={"election-details-status"} name={status} bgColor={status === "Open" ? ("bg-success") : (status === "Closed" ? ("bg-danger") : ("bg-secondary"))}/>
+                      <Status className={"election-details-status"} name={status.toUpperCase()} bgColor={status === "Open" ? ("bg-success") : (status === "Closed" ? ("bg-danger") : ("bg-secondary"))}/>
                     </div>
                     <div className='election-title-right'>
                       <div className='edit-delete-btns'>
@@ -87,7 +88,7 @@ const ElectionDetails = () => {
                   </div>
 
                 </div>
-                {/* <ElectionTable/> */}
+                <PositionTable elecID={details._id}/>
                 {/* modal */}
                 {/* <AddElectionModal show={showAddElection} close={closeElectionModal} toast={showToast}/> */}
 

@@ -12,22 +12,9 @@ import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons'
 import {useNavigate } from 'react-router-dom';
 
 
-const ElectionTable = () => {
-  const [elections, setElections] = useState([]);
-  const [showEdit, setEdit] = useState(false); //modal
+const ElectionTable = (prop) => {
+  const elections = prop.data;
   const navigate = useNavigate();
-
-  //renders updated members in database
-  useEffect(() => {
-    fetch('http://localhost:3001/get-elections')
-      .then(response => response.json())
-      .then(body => {
-        setElections(body);
-      });
-  }); // <-- Add an empty dependency array here
-
-  const showEditModal = () => setEdit(true);
-  const closeEditModal = () => setEdit(false);
 
   const caret = (order) => {
     if (!order) 
@@ -74,9 +61,6 @@ const ElectionTable = () => {
     }
   }
 
-  const handleView = (status) => {
-    console.log(status);
-  }
 
   //button for the table
   const renderButton = (cell, row, rowIndex, formatExtraData) => {
@@ -86,7 +70,7 @@ const ElectionTable = () => {
     return (
       <div className="d-flex justify-content-evenly">
         {/* onClick={showEditModal} */}
-        <button className="btn btn-success d-flex align-items-center justify-content-center" style={{width: "fit-content", height: "30px"}} 
+        <button className="btn btn-success d-flex align-items-center justify-content-center" style={{width: "fit-content", height: "30px", fontSize:"1vw"}} 
         onClick={()=> {navigate(`/election-details/${row.election_name}`, {state: {status: status}})}} >
          View Details
         </button>
@@ -127,7 +111,9 @@ const ElectionTable = () => {
             const end = new Date(row.end_date_time);
             const status = electionStatusGenerator(start,end);
           return(
-              <Status className={"election-status"} name={status} bgColor={status === "Open" ? ("bg-success") : (status === "Closed" ? ("bg-danger") : ("bg-secondary"))}/>
+            <div  className="d-flex justify-content-evenly">
+                 <Status className={"election-status"} name={status} bgColor={status === "Open" ? ("bg-success") : (status === "Closed" ? ("bg-danger") : ("bg-secondary"))}/>
+            </div>
           )
         }},
         {dataField: 'action', text: 'Actions', formatter: renderButton, formatExtraData: null}
@@ -150,17 +136,6 @@ const ElectionTable = () => {
     );
   };
 
-// const renderPaginationList = (props) => {
-//     return (
-//       <ul className="pagination justify-content-center" key={props.currentPage}> {/* Add key prop here */}
-//         {props.pages.map((page) => (
-//           <li key={page} className={`page-item ${props.currentPage === page ? 'active' : ''}`}>
-//             <a className="page-link" onClick={() => props.onPageChange(page)}>{page}</a> {/* Add key prop here */}
-//           </li>
-//         ))}
-//       </ul>
-//     );
-//   };
   
   const options = {
     paginationSize: 10,
@@ -178,12 +153,19 @@ const ElectionTable = () => {
     // renderPaginationList
   };
 
-  
+  const emptyDataMessage = () => {
+    return(
+      <div className="d-flex justify-content-evenly align-items-center">
+        <p className="m-0 text-secondary" >No Data</p>
+      </div>
+    )
+  };
+
 return (
   <div>
       <ToastContainer pauseOnHover/>
       <div className='mt-4'>
-        <BootstrapTable keyField='election_name' columns={columns} data={elections} striped={true} bootstrap4={true}  pagination={paginationFactory(options)}/> 
+        <BootstrapTable keyField='election_name' columns={columns} data={elections} striped={true} bootstrap4={true}  pagination={paginationFactory(options)} noDataIndication={emptyDataMessage}/> 
     </div>
   </div>
 )

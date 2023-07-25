@@ -2,32 +2,20 @@ import 'bootstrap/js/dist/dropdown';
 import "../assets/styles/search.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchIcon from '@mui/icons-material/Search';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
-const Search = () => {
+const Searchbar = (prop) => {
+  const onChange = prop.onChange;
+
   return (
     <div className="search">
         <div className="input-group">
             <div className="form-group">
                 <SearchIcon className="search-icon"/>
-                <input type="text" id="search" className="search-input" placeholder="Search"/>
+                <input type="text" id="search" className="search-input" placeholder="Search" onChange={onChange}/>
             </div>
-
-            <div className="filter-btn">
-              <button type="button" className="btn btn-primary" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <FilterAltIcon/>
-                Filter
-              </button>
-              <div className="dropdown-menu">
-                <option className="dropdown-item" >Action</option>
-                <option className="dropdown-item" >Another action</option>
-                <option className="dropdown-item" >Something else here</option>
-              </div>
-            </div>
-
         </div>
     </div>
   )
 }
 
-export default Search
+export default Searchbar
