@@ -3,7 +3,7 @@ import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import AdminSidebarData from "../components/admin-sidebar-data";
 import '../assets/styles/admin-member.css'
-import Search from "../components/search";
+import Searchbar from "../components/search";
 import HeaderBtnBlue from "../components/buttons/header-btn-blue";
 import HeaderBtnGray from "../components/buttons/header-btn-gray";
 import AddIcon from '@mui/icons-material/Add';
@@ -38,7 +38,7 @@ function AdminMember() {
             <div className="admin-page-body">
               <div className="admin-page-header">
                 {/* search inpput side */}
-                  <Search/>
+                  <Searchbar/>
                   {/* add button side */}
                   <div className="add-btn">
                     <HeaderBtnBlue name={"ADD MEMBER"} icon={AddIcon} onClick={handleShowAdd}/>

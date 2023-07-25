@@ -12,19 +12,9 @@ import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons'
 import {useNavigate } from 'react-router-dom';
 
 
-const ElectionTable = () => {
-  const [elections, setElections] = useState([]);
+const ElectionTable = (prop) => {
+  const elections = prop.data;
   const navigate = useNavigate();
-
-  //renders updated members in database
-  useEffect(() => {
-    fetch('http://localhost:3001/get-elections')
-      .then(response => response.json())
-      .then(body => {
-        setElections(body);
-      });
-  }); // <-- Add an empty dependency array here
-
 
   const caret = (order) => {
     if (!order) 
@@ -146,17 +136,6 @@ const ElectionTable = () => {
     );
   };
 
-// const renderPaginationList = (props) => {
-//     return (
-//       <ul className="pagination justify-content-center" key={props.currentPage}> {/* Add key prop here */}
-//         {props.pages.map((page) => (
-//           <li key={page} className={`page-item ${props.currentPage === page ? 'active' : ''}`}>
-//             <a className="page-link" onClick={() => props.onPageChange(page)}>{page}</a> {/* Add key prop here */}
-//           </li>
-//         ))}
-//       </ul>
-//     );
-//   };
   
   const options = {
     paginationSize: 10,

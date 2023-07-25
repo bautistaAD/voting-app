@@ -10,6 +10,8 @@ const AddElectionModal = (prop) => {
   const show = prop.show;
   const close = prop.close;
   const toast = prop.toast;
+  const setKey =prop.setKey;
+  const key = prop.key;
 
   const [electionName, setElectionName] = useState("");
   const [start, setStart] = useState("");
@@ -58,6 +60,7 @@ const AddElectionModal = (prop) => {
       if(body.success)
       {
         toast(body.success, body.message);
+        setKey(key+1);
         resetInput();
         close();
       }
