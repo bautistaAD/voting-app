@@ -17,13 +17,34 @@ const PositionTable = () => {
         position_name: "Membership Affairs Head Developer",
         election_id: "64b8d042cdfaae00e7977ffa"}
 
-    ]
+    ];
+  
+     //button for the table
+  const renderButton = (cell, row, rowIndex, formatExtraData) => {
+    return (
+      <div className="d-flex flex-wrap gap-3 justify-content-end">
+        <button className="btn btn-success d-flex align-items-center justify-content-center" style={{width: "120px", height: "30px", fontSize: "1vw"}} >
+          Candidates
+        </button>
+        <button className="btn btn-primary d-flex align-items-center justify-content-center" style={{width: "100px", height: "30px", fontSize: "1vw"}} >
+          Edit
+        </button>
+        <button className="btn btn-danger d-flex align-items-center justify-content-center" style={{width: "100px", height: "30px", fontSize: "1vw"}} >
+          Delete
+        </button>
+      </div>
+    );
+  };
 
-    //column header of the table
+  //column header of the table
   const columns = [
-    {dataField: 'position_name', text: '', headerAttrs: {hidden: true}},
-    {dataField: 'candidate count', text: '',headerAttrs: {hidden: true} },
-    {dataField: 'action', text: 'Actions',headerAttrs: {hidden: true}}
+    {dataField: 'position_name', text: '', headerAttrs: {hidden: true}, style: {'width' : '550px'}},
+    {dataField: 'candidate count', text: '',headerAttrs: {hidden: true}, style: {'width' : '300px'},
+      formatter: (cell, row) => {
+        return <div># Candidates</div>;
+      }
+    },
+    {dataField: 'action', text: 'Actions',headerAttrs: {hidden: true}, formatter: renderButton, formatExtraData: null}
 ]
 
   return (

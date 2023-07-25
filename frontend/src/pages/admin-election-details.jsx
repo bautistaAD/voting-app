@@ -53,7 +53,7 @@ const ElectionDetails = () => {
                   <div className='election-title'>
                     <div className='election-title-left'>
                       <h3>{nameDisplay}</h3>
-                      <Status className={"election-details-status"} name={status} bgColor={status === "Open" ? ("bg-success") : (status === "Closed" ? ("bg-danger") : ("bg-secondary"))}/>
+                      <Status className={"election-details-status"} name={status.toUpperCase()} bgColor={status === "Open" ? ("bg-success") : (status === "Closed" ? ("bg-danger") : ("bg-secondary"))}/>
                     </div>
                     <div className='election-title-right'>
                       <div className='edit-delete-btns'>

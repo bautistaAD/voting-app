@@ -121,7 +121,9 @@ const ElectionTable = () => {
             const end = new Date(row.end_date_time);
             const status = electionStatusGenerator(start,end);
           return(
-              <Status className={"election-status"} name={status} bgColor={status === "Open" ? ("bg-success") : (status === "Closed" ? ("bg-danger") : ("bg-secondary"))}/>
+            <div  className="d-flex justify-content-evenly">
+                 <Status className={"election-status"} name={status} bgColor={status === "Open" ? ("bg-success") : (status === "Closed" ? ("bg-danger") : ("bg-secondary"))}/>
+            </div>
           )
         }},
         {dataField: 'action', text: 'Actions', formatter: renderButton, formatExtraData: null}
