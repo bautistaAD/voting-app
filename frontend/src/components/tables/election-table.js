@@ -153,12 +153,19 @@ const ElectionTable = (prop) => {
     // renderPaginationList
   };
 
-  
+  const emptyDataMessage = () => {
+    return(
+      <div className="d-flex justify-content-evenly align-items-center">
+        <p className="m-0 text-secondary" >No Data</p>
+      </div>
+    )
+  };
+
 return (
   <div>
       <ToastContainer pauseOnHover/>
       <div className='mt-4'>
-        <BootstrapTable keyField='election_name' columns={columns} data={elections} striped={true} bootstrap4={true}  pagination={paginationFactory(options)}/> 
+        <BootstrapTable keyField='election_name' columns={columns} data={elections} striped={true} bootstrap4={true}  pagination={paginationFactory(options)} noDataIndication={emptyDataMessage}/> 
     </div>
   </div>
 )
