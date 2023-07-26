@@ -22,10 +22,35 @@ const ElectionDetails = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
-    let status = location.state.status;  // get state
-    let nameDisplay = location.state.name;
+    let initialStatus = location.state.status;  // get state
+    const [status, setStatus] = useState(initialStatus)
+
     let {id} = useParams();
 
+
+  //generates status
+  const electionStatusGenerator = () => {
+    if(details !== undefined || details !=null)
+    {
+      
+      const current = new Date();
+      const start = new Date(details.start_date_time);
+      const end = new Date (details.end_date_time)
+
+      if(start < current && current < end)
+      {
+          setStatus("OPEN");
+      }
+      else if( current < start && current < end)
+      {
+          setStatus("UPCOMING");
+      }
+      else if(start < current && end <current )
+      {
+          setStatus("CLOSED");
+      }
+    }
+  }
     
 
     useEffect(() => {
@@ -33,6 +58,7 @@ const ElectionDetails = () => {
       .then((response) => response.json())
       .then((body) => {
         setDetails(body);
+        electionStatusGenerator()
       })
     });
   
@@ -45,6 +71,8 @@ const ElectionDetails = () => {
           return name.toUpperCase();
       }
   }; 
+
+
 
   return (
     <div id="main">
@@ -65,7 +93,7 @@ const ElectionDetails = () => {
                   <div className='election-title'>
                     <div className='election-title-left'>
                       <h3>{textFormatter(details.election_name)}</h3>
-                      <Status className={"election-details-status"} name={status.toUpperCase()} bgColor={status === "Open" ? ("bg-success") : (status === "Closed" ? ("bg-danger") : ("bg-secondary"))}/>
+                      <Status className={"election-details-status"} name={status} bgColor={status === "OPEN" ? ("bg-success") : (status === "CLOSED" ? ("bg-danger") : ("bg-secondary"))}/>
                     </div>
                     <div className='election-title-right'>
                       <div className='edit-delete-btns'>
