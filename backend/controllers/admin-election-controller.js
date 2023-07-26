@@ -50,10 +50,10 @@ const getElections = async (req,res) => {
     }
 }
 
-const getElectionByName = async (req,res) => {
+const getElectionById = async (req,res) => {
     try
     {
-        const election = await Election.findOne({election_name: req.query.name});
+        const election = await Election.findOne({_id: req.query.id});
         res.send(election);
     }
     catch(err)
@@ -104,4 +104,21 @@ const getPositions = async (req,res) => {
     }
 }
 
-export {addElection, getElections, getElectionByName, addPosition, getPositions};
+const editElection = async (req,res) => {
+    try
+    {
+        const editElection = await Election.findOne({_id: req.body.election_id});
+        editElection.election_name = req.body.election_name.toLowerCase();
+        editElection.start_date_time = new Date(req.body.start_date_time);
+        editElection.end_date_time = new Date(req.body.end_date_time);
+
+        await editElection.save()
+        res.send({success: true, message: "Saved changes"});
+    }
+    catch(err)
+    {
+        console.log(err);
+        res.send({success: false, message: "An error occured"});
+    }
+}
+export {addElection, getElections, getElectionById, addPosition, getPositions, editElection};

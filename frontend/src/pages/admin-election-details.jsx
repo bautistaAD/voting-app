@@ -12,27 +12,39 @@ import Status from '../components/status';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import PositionTable from '../components/tables/position-table';
+import EditElectionModal from '../components/modals/edit-election-modal';
 
 const ElectionDetails = () => {
     const [sidebar, setSidebar] = useState("inactive");
     const [main, setMain] = useState("main-inactive");
     const [details, setDetails] = useState("");
+    const [edit, setEdit] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
     let status = location.state.status;  // get state
-    let {name} = useParams();
+    let nameDisplay = location.state.name;
+    let {id} = useParams();
 
-    const nameDisplay = name.toUpperCase();
+    
 
     useEffect(() => {
-      fetch(`http://localhost:3001/get-election-by-name?name=${name}`)
+      fetch(`http://localhost:3001/get-election-by-id?id=${id}`)
       .then((response) => response.json())
       .then((body) => {
         setDetails(body);
       })
     });
   
+    const showEdit = () => setEdit(true);
+    const closeEdit = () => setEdit(false);
+
+    const textFormatter = (name) => {
+      if(name!= null)
+      {
+          return name.toUpperCase();
+      }
+  }; 
 
   return (
     <div id="main">
@@ -52,12 +64,12 @@ const ElectionDetails = () => {
 
                   <div className='election-title'>
                     <div className='election-title-left'>
-                      <h3>{nameDisplay}</h3>
+                      <h3>{textFormatter(details.election_name)}</h3>
                       <Status className={"election-details-status"} name={status.toUpperCase()} bgColor={status === "Open" ? ("bg-success") : (status === "Closed" ? ("bg-danger") : ("bg-secondary"))}/>
                     </div>
                     <div className='election-title-right'>
                       <div className='edit-delete-btns'>
-                      <ModeEditOutlineOutlinedIcon fontSize='medium' id="election-details-edit"/>
+                      <ModeEditOutlineOutlinedIcon fontSize='medium' id="election-details-edit" onClick={showEdit}/>
                       <DeleteOutlineOutlinedIcon fontSize='medium' id="election-details-delete"/>
                       </div>
                     </div>
@@ -88,9 +100,10 @@ const ElectionDetails = () => {
                   </div>
 
                 </div>
-                <PositionTable elecID={details._id}/>
+                <PositionTable elecID={id}/>
                 {/* modal */}
                 {/* <AddElectionModal show={showAddElection} close={closeElectionModal} toast={showToast}/> */}
+                <EditElectionModal show={edit} close={closeEdit} details={details}/>
 
                 </div>
             </div>

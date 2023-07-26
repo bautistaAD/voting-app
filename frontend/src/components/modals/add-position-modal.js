@@ -48,11 +48,12 @@ const AddPositionModal = (prop) => {
     .then((response) => response.json())
     .then((body) => {
       showToast(body.success, body.message);
+      setPosition("");
     })
   }
     
   return (
-    <div className="add-member-modal">
+    <div className="add-position-modal">
         <ToastContainer pauseOnHover={false}/>
         <Modal show={show} centered className="modal-container" >
             <Modal.Body className="modal-body">

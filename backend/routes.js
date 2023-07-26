@@ -1,7 +1,7 @@
 import {addMember, importCSV, getAllMembers, editMember, deleteMember} from "./controllers/admin-mem-controller.js";
 import {login, checkIfLoggedIn} from "./controllers/login-auth-controller.js";
 import { changePassword } from "./controllers/admin-account-controller.js";
-import { addElection, getElections, getElectionByName, addPosition, getPositions} from "./controllers/admin-election-controller.js";
+import { addElection, getElections, getElectionById, addPosition, getPositions,editElection} from "./controllers/admin-election-controller.js";
 const setUpRoutes = (app) => {
   //to change
   app.get("/", (req, res) => {
@@ -21,9 +21,10 @@ const setUpRoutes = (app) => {
 
   app.post("/add-election", addElection);
   app.get("/get-elections", getElections);
-  app.get("/get-election-by-name", getElectionByName);
+  app.get("/get-election-by-id", getElectionById);
   app.post("/add-position", addPosition);
   app.post("/get-positions", getPositions);
+  app.post("/edit-election", editElection);
 
 }
 
