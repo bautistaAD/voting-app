@@ -65,3 +65,7 @@
 #modal-submit-btn:hover{
     background-color: var(--hover-blue);
 }
+
+#edit-election-name{
+    text-transform: uppercase;
+}

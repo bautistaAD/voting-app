@@ -105,22 +105,26 @@ const ElectionDetails = () => {
 
                   <div className='election-data'>
                     <div className='election-data-left'>
-                      <div className='time-date-data'>
-                          <div className='open-date'>
-                            <p className='date-label'>Opening Date</p>
-                            <p className='date-data'>{new Date(details.start_date_time).toLocaleDateString()}</p>
+                      <div className='election-details-row'>
+                          <div className='column-data'>
+                            <p className='column-label'>Opening Date</p>
+                            <p className='column-value'>{new Date(details.start_date_time).toLocaleDateString()}</p>
                           </div>
-                          <div className='open-time'>
-                            <p className='time-label'>Opening Time</p>
+                          <div className='column-data'>
+                            <p className='column-label'>Opening Time</p>
                             <p className='time-data'>{new Date(details.start_date_time).toLocaleTimeString()}</p>
                           </div>
-                          <div className='close-date'>
-                            <p className='date-label'>Closing Date</p>
-                            <p className='date-data'>{new Date(details.end_date_time).toLocaleDateString()}</p>
+                          <div className='column-data'>
+                            <p className='column-label'>Closing Date</p>
+                            <p className='column-value'>{new Date(details.end_date_time).toLocaleDateString()}</p>
                           </div>
-                          <div className='close-time'>
-                            <p className='time-label'>Closing Time</p>
-                            <p className='time-data'>{new Date(details.end_date_time).toLocaleTimeString()}</p>
+                          <div className='column-data'>
+                            <p className='column-label'>Closing Time</p>
+                            <p className='column-value'>{new Date(details.end_date_time).toLocaleTimeString()}</p>
+                          </div>
+                          <div className='column-data'>
+                            <p className='column-label'>Type</p>
+                            <p className='column-value'>{details.type}</p>
                           </div>
                       </div>
                       <Button className='btn-success'>View Results</Button>

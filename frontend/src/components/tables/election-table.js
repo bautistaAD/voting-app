@@ -83,6 +83,9 @@ const ElectionTable = (prop) => {
       {dataField: 'election_name', text: 'Election Name', sort: true, 
         sortCaret: (order, column) => {
           return caret(order);
+        },
+        formatter: (cell, row) => {
+          return row.election_name.toUpperCase() ;
         }
       },
       {dataField: 'start_date_time', text: 'Start' , sort: true,   
@@ -105,6 +108,7 @@ const ElectionTable = (prop) => {
           return caret(order);
         }
       },
+      {dataField: 'type', text: 'Type'},
       {dataField: 'status', text: 'Status', style: {'width' : '150px'},
         formatter: (cell, row) => {
             const start = new Date(row.start_date_time);

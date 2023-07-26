@@ -2,6 +2,7 @@ import { Modal } from "react-bootstrap"
 import ModalButtons from "../buttons/modal-btns";
 import ModalTextInput from "../inputs/modal-text-input";
 import ModalDateTimeInput from "../inputs/datetime-input";
+import SelectInput from "../inputs/select-input";
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer, toast} from 'react-toastify';
 import { useState } from "react";
@@ -12,37 +13,29 @@ const AddElectionModal = (prop) => {
   const toast = prop.toast;
   const setKey =prop.setKey;
   const key = prop.keyValue;
+  const selectData = ["Regular", "Snap", "Special"];
 
   const [electionName, setElectionName] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
+  const [type, setType] = useState("")
 
-  const inputChecker = electionName === "" || start === "" || end === "";
+  const inputChecker = electionName === "" || start === "" || end === "" || type == "";
 
 
-  const handleElectionName = (e) => {
-    setElectionName(e.target.value);
-  }
-
-  const handleStart= (e) => {
-    setStart(e.target.value);
-  }
-
-  const handleEnd= (e) => {
-    setEnd(e.target.value);
-  }
+  const handleElectionName = (e) => setElectionName(e.target.value.toUpperCase());
+  const handleStart= (e) => setStart(e.target.value);
+  const handleEnd= (e) => setEnd(e.target.value);
+  const handleType = (e) => setType(e.target.value);
 
   const resetInput = () => {
     setElectionName("");
     setStart("");
     setEnd("");
+    setType("");
   }
 
   const handleAddElection = () => {
-    console.log(electionName);
-    console.log(start);
-    console.log(end);
-
     fetch('http://localhost:3001/add-election', {
       method: 'POST',
       headers: {
@@ -52,7 +45,8 @@ const AddElectionModal = (prop) => {
         election_name: electionName,
         start_date_time: start,
         end_date_time: end,
-        is_results_open: false
+        is_results_open: false,
+        type: type
       })
     })
     .then((response) => response.json())
@@ -83,7 +77,7 @@ const AddElectionModal = (prop) => {
             <ModalTextInput label={"Election Name"} onChange={handleElectionName} value={electionName}/>
             <ModalDateTimeInput label={"Start Time"} onChange={handleStart} value={start}/>
             <ModalDateTimeInput label={"End Time"} onChange={handleEnd} value={end}/>
- 
+            <SelectInput label={"Election Type"} id="select-type" data={selectData} onChange={handleType} value={type}/>
             <ModalButtons name={"Add"} close={close} onClick={handleAddElection} inputChecker={inputChecker}/>
         </Modal.Body> 
     </Modal>

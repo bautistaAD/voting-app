@@ -63,18 +63,18 @@
     color: var(--light-blue);
 }
 
-.time-date-data{
+.election-details-row{
     display: flex;
     gap: 40px;
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
-.date-label, .date-data, .time-label, .time-data{
+.column-label, .column-data{
     margin: 0px;
 }
 
-.date-label, .time-label {
+.column-label {
     color: var(--dark-gray)
 }
 

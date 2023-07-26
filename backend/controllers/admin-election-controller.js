@@ -8,7 +8,7 @@ const Position = mongoose.model("Position", PositionSchema );
 const addElection = async (req,res) => {
     try
     {
-        const {election_name, start_date_time, end_date_time, is_results_open} = req.body;
+        const {election_name, start_date_time, end_date_time, is_results_open, type} = req.body;
 
         const electionChecker = await Election.findOne({election_name: election_name});
 
@@ -18,7 +18,8 @@ const addElection = async (req,res) => {
                 election_name: election_name.toLowerCase(),
                 start_date_time: new Date(start_date_time),
                 end_date_time: new Date(end_date_time),
-                is_results_open: is_results_open
+                is_results_open: is_results_open,
+                type: type
             });
 
             await newElection.save();
@@ -111,6 +112,7 @@ const editElection = async (req,res) => {
         editElection.election_name = req.body.election_name.toLowerCase();
         editElection.start_date_time = new Date(req.body.start_date_time);
         editElection.end_date_time = new Date(req.body.end_date_time);
+        editElection.type= req.body.type;
 
         await editElection.save()
         res.send({success: true, message: "Saved changes"});
