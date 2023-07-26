@@ -2,7 +2,7 @@ import { Modal } from "react-bootstrap";
 import ModalButtons from "../buttons/modal-btns";
 import ModalTextInput from "../inputs/modal-text-input";
 import ModalDateTimeInput from "../inputs/datetime-input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {ToastContainer, toast} from 'react-toastify';
 
 
@@ -12,20 +12,21 @@ const EditElectionModal = (prop) => {
     const close = prop.close;
     const details = prop.details;
 
-    const [name, setName] = useState('');
-    const [start, setStart] = useState('');
-    const [end, setEnd] = useState('');
+    const [name, setName] = useState();
+    const [start, setStart] = useState();
+    const [end, setEnd] = useState();
 
-    const handleName = (e) => 
-    {
-        setName(e.target.value.toUpperCase())
-    }
-    
+    const handleName = (e) => setName(e.target.value.toUpperCase())
     const handleStart = (e) => setStart(e.target.value)
     const handleEnd = (e) => setEnd(e.target.value)
+    const handleClose = (e) => {
+      close()
+      setName(details.election_name.toUpperCase());
+      setStart(displayDateConverter(details.start_date_time));
+      setEnd(displayDateConverter(details.end_date_time));
+    }
     
-
-    const timeConverter = (original) => {
+    const displayDateConverter = (original) => { //convert the date and time string "2023-07-19T06:12:00.000Z" to "2023-07-19T06:12"
         const originalDateTimeString = original;
 
         // Convert the original date string to a Date object
@@ -44,12 +45,30 @@ const EditElectionModal = (prop) => {
         return newDateTimeString
     }
 
-    const textFormatter = (name) => {
-        if(name!= null)
-        {
-            return name.toUpperCase();
-        }
-    }; 
+    const originalDateConverter = (date) => {
+
+      // Convert the original date string to a Date object
+      const originalDate = new Date(date);
+
+      // Add seconds and milliseconds to the Date object
+      originalDate.setSeconds(0);
+      originalDate.setMilliseconds(0);
+
+      // Convert the Date object to the ISO 8601 format (with timezone information)
+      const newDateTimeString = originalDate.toISOString();
+
+      return newDateTimeString;
+    }
+
+    useEffect(()=>{
+      
+      if((name === undefined || start === undefined || end === undefined ) &&  details.election_name !== undefined)
+      {
+        setName(details.election_name.toUpperCase());
+        setStart(displayDateConverter(details.start_date_time));
+        setEnd(displayDateConverter(details.end_date_time));
+      }
+    }, [prop.details])
 
     const showToast = (success, message) => {
         if(success)
@@ -78,8 +97,8 @@ const EditElectionModal = (prop) => {
             body: JSON.stringify({
                 election_id: details._id,
                 election_name: name,
-                start_date_time: start,
-                end_date_time: end
+                start_date_time: originalDateConverter(start),
+                end_date_time: originalDateConverter(end)
                 })
         })
         .then((response) => response.json())
@@ -87,9 +106,6 @@ const EditElectionModal = (prop) => {
             showToast(body.success, body.message);
         })
         
-        console.log(start)
-        console.log(end)
-        console.log(details._id)
  }
 
   return (
@@ -102,7 +118,7 @@ const EditElectionModal = (prop) => {
                 <ModalDateTimeInput label={"Start Time"} value={start} onChange={handleStart}/>
                 <ModalDateTimeInput label={"End Time"} value={end} onChange={handleEnd}/>
                 {/* onClick={handleAdd}  inputChecker={inputChecker} */}
-                <ModalButtons name={"Save"} close={close} onClick={()=> {handleSave()}}/>
+                <ModalButtons name={"Save"} close={handleClose} onClick={()=> {handleSave()}}/>
 
             </Modal.Body> 
         </Modal>
