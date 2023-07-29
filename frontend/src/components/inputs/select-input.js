@@ -11,7 +11,7 @@ const SelectInput = (prop) => {
     <div className='select-input'>
         <div className='modal-label'>{label}</div>
         <select className="form-select" id={id} onChange={onChange} value={value}>
-            <option value="" selected disabled >Select Option</option>
+            <option value="" disabled >Select Option</option>
             {
                 data.map((option, key) =>(
                     <option value={option} key={key}>{option}</option>
