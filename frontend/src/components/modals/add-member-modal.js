@@ -88,7 +88,7 @@ const AddMemberModal = (prop) => {
 
   return (
     <div className="add-member-modal">
-        <ToastContainer/>
+        {/* <ToastContainer/> */}
         <Modal show={show} centered className="modal-container" >
             <Modal.Body className="modal-body">
             <Modal.Title className="modal-title">Add Member</Modal.Title>
