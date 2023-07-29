@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer, toast} from 'react-toastify';
 
 const ImportCSVModal = (prop) => {
+    const keyValue = prop.keyValue;
+    const setKey = prop.setKey;
     const show = prop.show;
     const close = prop.close;
 
@@ -68,6 +70,7 @@ const ImportCSVModal = (prop) => {
         .then((response) => response.json())
         .then((body) => {
             showToast(true, body.message);
+            setKey(keyValue+1)
             close();
         })
     }
@@ -75,7 +78,6 @@ const ImportCSVModal = (prop) => {
 
   return (
     <div className="add-member-modal">
-        <ToastContainer pauseOnHover={false}/>
         <Modal show={show} centered className="modal-container" >
             <Modal.Body className="modal-body">
                 <Modal.Title className="modal-title">Import CSV File</Modal.Title>

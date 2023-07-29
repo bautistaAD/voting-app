@@ -13,20 +13,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
 
-const MembersTable = () => {
-  const [members, setMembers] = useState([]);
+const MembersTable = (prop) => {
+  const members = prop.data
+  const keyValue = prop.keyValue;
+  const setKey = prop.setKey;
   const [showEdit, setEdit] = useState(false); //modal
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  //renders updated members in database
-  useEffect(() => {
-      fetch('http://localhost:3001/get-members')
-      .then(response => response.json())
-      .then(body => {
-          setMembers(body);
-      });
-  })
 
   const showEditModal = () => setEdit(true);
   const closeEditModal = () => setEdit(false);
@@ -90,6 +84,7 @@ const MembersTable = () => {
     .then((response) => response.json())
     .then((body) => {
         showToast(body.success, body.message);
+        setKey(keyValue-1);
     })
   }
 
