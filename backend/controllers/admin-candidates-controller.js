@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import multer from "multer";
 import fs from "fs";
+import { ObjectId } from "mongodb";
 
 
 import {ElectionSchema } from "../models/election.js";
@@ -17,7 +18,7 @@ const Candidate = mongoose.model("Candidate", CandidateSchema);
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         fs.mkdir("./uploads/", (err) => {
-            cd(null, "./uploads/");
+            cb(null, "./uploads/");
         });
     },
     filename: (req,file,cb) => {
@@ -34,12 +35,13 @@ const upload = multer({storage});
 const addCandidate = async (req,res) => {
     try
     {
-        const {memberid, positionid} = req.body;
+        const {member_id, position} = req.body;
         const gpoa = req.file
 
+
         const newCandidate = new Candidate({
-            member_id: memberid,
-            position_id: positionid,
+            member_id: new ObjectId(member_id),
+            position: position,
             gpoa: gpoa
         })
 
@@ -54,6 +56,41 @@ const addCandidate = async (req,res) => {
     }
 }
 
+const getCandidates = async (req,res) => {
+    try
+    {
+        const candidates = await Candidate.find({});
+        res.send(candidates);
+    }
+    catch(err)
+    {
+        console.log(err);
+        res.send(err);
+    }
+}
+
+const checkIfCandidate = async(req, res) => {
+    try
+    {
+        const member = req.body.member_id;
+        const position = req.body.position;
+        
+        const find = await Candidate.findOne({member_id: member, position: position});
+
+        if(!find)
+        {
+            res.send({isCandidate: false});
+        }
+        else{
+            res.send({isCandidate: true});
+        }
+    }
+    catch(err)
+    {
+
+    }
+}
 
 
-export {addCandidate, upload};
+
+export {addCandidate, upload, getCandidates, checkIfCandidate};

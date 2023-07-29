@@ -151,7 +151,7 @@ function AdminCandidate() {
               {/* cards */}
 
               {/* modal */}
-              <AddCandidateModal show={add} close={closeAdd} />
+              <AddCandidateModal show={add} close={closeAdd} posId={positionId} />
               
             </div>
           </div>

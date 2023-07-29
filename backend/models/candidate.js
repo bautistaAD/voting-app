@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 
 const CandidateSchema = new Schema({
   member_id: {type: Schema.Types.ObjectId, ref: "User", required: true },
-  position: [{type: Schema.Types.ObjectId, ref: "Position", required: true}],
-  //gpoa: {}
+  position: {type: Schema.Types.ObjectId, ref: "Position", required: true},
+  gpoa: {type: Object, reuired: true}
 });
 
 const Candidate = mongoose.model("Candidate", CandidateSchema);
