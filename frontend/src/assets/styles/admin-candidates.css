@@ -1,0 +1,27 @@
+#election-selector, #position-selector{
+    width: 30vw;
+}
+
+.sub-header{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #C9CBCC;
+    border-bottom: 1px solid #C9CBCC;
+}
+
+#select-candidate{
+    height:40px;
+    overflow-y:auto;
+     
+}
+option{
+    overflow-y:scroll;
+}
+
+select option {
+    width: 200px;
+  }
+
+
