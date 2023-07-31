@@ -69,28 +69,31 @@ const getCandidates = async (req,res) => {
     }
 }
 
-const checkIfCandidate = async(req, res) => {
+const getMembersNotCandidate = async(req, res) => { //members
     try
     {
-        const member = req.body.member_id;
-        const position = req.body.position;
-        
-        const find = await Candidate.findOne({member_id: member, position: position});
+        const candidatesPerPosition = await Candidate.find({position: req.body.position});
+        const allMembers = await User.find({'user_type': {$ne: "Admin"}});
+        const membersNotCandidates = allMembers;
 
-        if(!find)
-        {
-            res.send({isCandidate: false});
+        for(let i =0; i < candidatesPerPosition.length; i++){
+            for(let y=0; y < allMembers.length; y++){
+                if(JSON.stringify(candidatesPerPosition[i].member_id) == JSON.stringify(membersNotCandidates[y]._id))
+                {
+                    membersNotCandidates.splice(y, 1);
+                }
+            }
         }
-        else{
-            res.send({isCandidate: true});
-        }
+        
+        res.send(membersNotCandidates)
+    
     }
     catch(err)
     {
-
+        console.log(err);
     }
 }
 
 
 
-export {addCandidate, upload, getCandidates, checkIfCandidate};
+export {addCandidate, upload, getCandidates, getMembersNotCandidate};
