@@ -10,6 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 import HeaderBtnGray from "../components/buttons/header-btn-gray";
 import SortOutlinedIcon from '@mui/icons-material/SortOutlined';
 import AddCandidateModal from "../components/modals/add-candidates-modal";
+import CandidateCard from "../components/cards";
 
 function AdminCandidate() {
   const [sidebar, setSidebar] = useState("inactive");
@@ -21,6 +22,7 @@ function AdminCandidate() {
   const [positions, setPositions] = useState([]); //array of positions of selected election
   const [selectPosition, setSelectPosition] = useState(""); 
   const [positionId, setPositionId] = useState();
+  const [candidates, setCandidates] = useState([]);
 
   const [add, setAdd] = useState(false);
 
@@ -46,6 +48,8 @@ function AdminCandidate() {
       .then(body => {
         setPositions(body)
       });
+
+      
   }, [selectElection, selectPosition]);
 
 
@@ -149,6 +153,16 @@ function AdminCandidate() {
                 </div>
               </div>
               {/* cards */}
+              <div className="candidate-cards d-flex flex-wrap gap-3">
+                <CandidateCard/>
+                <CandidateCard/>
+                <CandidateCard/>
+                <CandidateCard/>
+                <CandidateCard/>
+                <CandidateCard/>
+                <CandidateCard/>
+                <CandidateCard/>
+              </div>
 
               {/* modal */}
               <AddCandidateModal show={add} close={closeAdd} posId={positionId} />

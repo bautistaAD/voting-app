@@ -3,8 +3,6 @@ import ModalButtons from "../buttons/modal-btns";
 import SelectInput from "../inputs/select-input";
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from "react";
-import { Form } from "react-router-dom";
-import AccordionBody from "react-bootstrap/esm/AccordionBody";
 import {ToastContainer, toast} from 'react-toastify';
 
 
@@ -17,42 +15,34 @@ const AddCandidateModal = (prop) => {
   const key = prop.keyValue;
 
   const [members, setMembers] = useState([]);
-  const [candidate, setCandidate] = useState("");
+  const [candidate, setCandidate] = useState(""); //selected member
   const [gpoa, setGpoa] = useState(null);
   const [memid, setMemId] = useState();
-  const [candidates, setCandidates] = useState([]);
-  const [checker, setChecker] = useState()
+
+
    //renders updated members in database
     useEffect(() => {
-        fetch('http://localhost:3001/get-members')
-        .then(response => response.json())
-        .then(body => {
-            setMembers(body);
-        });
+        fetch('http://localhost:3001/get-members-not-candidate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            position: positionId
+          })
+        })
+        .then((response) => response.json())
+        .then((body) => {
+          setMembers(body)
+        })
 
-        fetch('http://localhost:3001/get-candidates')
-        .then(response => response.json())
-        .then(body => {
-            setCandidates(body);
-        });
-    }, [checker]) 
+        // fetch('http://localhost:3001/get-candidates')
+        // .then(response => response.json())
+        // .then(body => {
+        //     setCandidates(body);
+        // });
+    }, [members]) 
     
-const candidateChecker = (member) =>{
-  fetch("http://localhost:3001/check-if-candidate", {
-    method: 'POST',
-    headers: {
-      'Content-Type' : 'application/json'
-    },
-    body: JSON.stringify({
-      member_id: member,
-      position: positionId
-    })
-  })
-  .then((response) => response.json())
-  .then((body) => {
-    setChecker(body.isCandidate)
-  })
-}
 
 const getMemberNames = (members) => {
     if(members === undefined) return ["None"]
@@ -115,8 +105,8 @@ const handleCandidate = (e) => {
   getMemId(e.target.value)
 }; 
 
-const handleGpoa = (e) => {setGpoa(e.target.files[0])
-  console.log(e.target.files[0])
+const handleGpoa = (e) => {
+  setGpoa(e.target.files[0])
 } ;
 
 const resetInput = () => {
@@ -126,9 +116,6 @@ const resetInput = () => {
 }
 
 const handleAdd = () => {
-    //mem id is saved as string
-    console.log(memid)
-    console.log(positionId)
     const formData = new FormData();
     formData.append('member_id', memid);
     formData.append('position', positionId);
