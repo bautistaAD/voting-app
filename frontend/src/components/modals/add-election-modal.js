@@ -69,7 +69,7 @@ const AddElectionModal = (prop) => {
 
   return (
     <div className="add-election-modal">
-    <ToastContainer pauseOnHover={false}/>
+    {/* <ToastContainer pauseOnHover={false}/> */}
     <Modal show={show} centered className="modal-container" >
         <Modal.Body className="modal-body">
         <Modal.Title className="modal-title">Add Election</Modal.Title>

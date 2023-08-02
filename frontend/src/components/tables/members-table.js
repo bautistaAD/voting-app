@@ -167,7 +167,6 @@ const MembersTable = (prop) => {
   
 return (
   <div>
-      <ToastContainer pauseOnHover/>
       <div className='mt-4'>
         <BootstrapTable keyField='student-number' columns={columns} data={members} striped={true} bootstrap4={true}  pagination={paginationFactory(options)}/> 
     </div>

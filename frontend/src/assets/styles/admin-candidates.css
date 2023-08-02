@@ -1,0 +1,95 @@
+#election-selector, #position-selector{
+    width: 30vw;
+}
+
+.sub-header{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #C9CBCC;
+    border-bottom: 1px solid #C9CBCC;
+}
+
+#select-candidate{
+    height:40px;
+    overflow-y:auto;
+     
+}
+option{
+    overflow-y:scroll;
+}
+
+select option {
+    width: 200px;
+  }
+
+/* cards */
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+
+    padding-top: 30px;
+    height: 250px;
+    width: 15.8rem !important;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    padding-top: 10px;
+    width: 100%;
+}
+
+.card-title{
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow:ellipsis; 
+    
+    width: fit-content;
+    max-width:200px; 
+    margin: auto;
+}
+
+
+.candidate-profile{
+    width: 90px;
+    height: 90px;
+    background-color: gray;
+}
+
+.candidate-cards{
+    height: 30vw;
+    overflow: scroll;
+}
+
+.card-text {
+    color: #7F7F7F;
+    font-size: 16px;
+}
+
+.card-button{
+    background-color: white;
+    border: 2px solid #07223E;
+    width: 70px;
+    font-size: 12px;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    padding: 0px;
+    border: 0%;
+    margin-bottom: 15px;
+}
+
+.no-candidates{
+    padding-top: 10vw;
+    width: 100%
+}

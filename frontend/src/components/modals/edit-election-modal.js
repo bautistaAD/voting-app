@@ -118,7 +118,7 @@ const EditElectionModal = (prop) => {
 
   return (
     <div className="edit-election-modal">
-        <ToastContainer pauseOnHover={false}/>
+        {/* <ToastContainer pauseOnHover={false}/> */}
         <Modal show={show} centered className="modal-container" >
             <Modal.Body className="modal-body">
                 <Modal.Title className="modal-title">Edit Election</Modal.Title>

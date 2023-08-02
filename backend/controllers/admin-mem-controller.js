@@ -175,4 +175,22 @@ const deleteMember = async (req, res) => {
     }
 }
 
-export {addMember, importCSV, getAllMembers, editMember, deleteMember};
+const getMemberIdByName = async (req,res) => {
+    try
+    {
+        const name = req.body.fullName;
+
+        await User.collection.createIndex({first_name: 'text', middle_name: 'text' , last_name: 'text'});
+
+        //perform search
+        const searchMember = await User.findOne({$text: {$search: name}});
+
+        res.send(searchMember);
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+}
+
+export {addMember, importCSV, getAllMembers, editMember, deleteMember, getMemberIdByName};
