@@ -23,11 +23,29 @@ function AdminCandidate() {
   const [selectPosition, setSelectPosition] = useState(""); //selected position
   const [positionId, setPositionId] = useState(); //id of selected position
   const [candidates, setCandidates] = useState([]); //candidates
+  const [sort, setSort] = useState("");
+  const [search, setSearch] = useState("");
   const [add, setAdd] = useState(false);
 
   const addInputChecker = selectElection === "" || selectPosition === ""; //if not selected "add candidate" btn is disabled
 
-  
+  const sortCandidate = (body) => {
+    if(sort ==="") 
+    {
+      setCandidates(body);
+    }
+    else if(sort === "asc")
+    {
+      const sortedCandidatesCopy = [...body];
+      sortedCandidatesCopy.sort((a, b) => a.first_name.localeCompare(b.first_name));
+      setCandidates(sortedCandidatesCopy);
+    }
+    else{
+      const sortedCandidatesCopy = [...body];
+      sortedCandidatesCopy.sort((a, b) => b.first_name.localeCompare(a.first_name));
+      setCandidates(sortedCandidatesCopy);
+    }
+  }
 
   useEffect(() => {
     fetch('http://localhost:3001/get-elections')
@@ -56,7 +74,7 @@ function AdminCandidate() {
         fetch('http://localhost:3001/get-candidates')
         .then(response => response.json())
         .then(body => {
-          setCandidates(body);
+          sortCandidate(body);
         });
       }
       else
@@ -74,7 +92,7 @@ function AdminCandidate() {
             })
             .then(response => response.json())
             .then(body => {
-              setCandidates(body);
+              sortCandidate(body);
             });
           }
           else
@@ -90,14 +108,11 @@ function AdminCandidate() {
             })
             .then(response => response.json())
             .then(body => {
-              setCandidates(body);
+              sortCandidate(body);
             });
           }
       }
   },[candidates]);
-
-  // [candidates, selectElection, positions]
-
 
  const showAdd = () => setAdd(true);
  const closeAdd = () => setAdd(false);
@@ -152,8 +167,6 @@ const getPositionId = (name) => {
     }
   }
 
-
-
   const handleSelectPosition = (e) => {
     setSelectPosition(e.target.value);
     getPositionId(e.target.value);
@@ -180,6 +193,20 @@ const getPositionId = (name) => {
     setPositionId(null)
   }
 
+  const handleSort = () =>{
+    if(sort === "" || sort === "desc")
+    {
+      setSort("asc")
+    }
+    else{
+      setSort("desc")
+    }
+  }
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value)
+  }
+
 
   return (
      <div id="main">
@@ -197,20 +224,40 @@ const getPositionId = (name) => {
                 </div>
                 <div className="sub-header d-flex flex-wrap justify-content-between">
                     <div className="sub-header-left d-flex gap-3">
-                      <Searchbar/>
-                      <HeaderBtnGray name="SORT" icon={SortOutlinedIcon}/>
+                      <Searchbar onChange={handleSearch}/>
+                      <HeaderBtnGray name="SORT" icon={SortOutlinedIcon}  onClick={handleSort}/>
                     </div>
                     <HeaderBtnBlue name="ADD CANDIDATE" icon={AddIcon} checker={addInputChecker} onClick={showAdd}/>
                 </div>
               </div>
               {/* cards */}
               <div className="candidate-cards d-flex flex-wrap gap-3">
-                {candidates.length === 0 ? (<div className="no-candidates d-flex justify-content-center text-secondary"> No Candidates. </div>) : 
+                {/* {candidates.length === 0 ? (<div className="no-candidates d-flex justify-content-center text-secondary"> No Candidates. </div>) : 
               ( candidates.map((mem, index) => (
 
                 <CandidateCard key={index} name={mem.first_name + " " + mem.last_name} email={mem.email}/>
               )) 
-              )}
+              )} */}
+               {candidates.length === 0 ? (
+                  <div className="no-candidates d-flex justify-content-center text-secondary"> No Candidates. </div>
+                ) : (
+                  candidates
+                    .filter((mem) => {
+                      const fullName = `${mem.first_name} ${mem.last_name}`;
+                      return fullName.toLowerCase().includes(search.toLowerCase()) || mem.email.toLowerCase().includes(search.toLowerCase());
+                    })
+                    .map((mem, index) => (
+                      <CandidateCard key={index} name={`${mem.first_name} ${mem.last_name}`} email={mem.email} />
+                    ))
+                )}
+                
+                {/* If no matching candidates for the search query */}
+                {candidates.length > 0 && candidates.filter((mem) => {
+                  const fullName = `${mem.first_name} ${mem.last_name}`;
+                  return fullName.toLowerCase().includes(search.toLowerCase()) || mem.email.toLowerCase().includes(search.toLowerCase());
+                }).length === 0 && (
+                  <div className="no-candidates d-flex justify-content-center text-secondary"> No matching candidates found. </div>
+                )}
               </div>
 
               {/* modal */}
