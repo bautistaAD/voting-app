@@ -41,13 +41,13 @@ function AdminMember() {
   }, [refreshKey])
 
   const handleSearch = (e) => {
-    const searchVal = e.target.value;
+    const searchVal = e.target.value.toLowerCase();
     setSearch(searchVal)
 
     if(searchVal.length > 0)
     {
-      const searchData = members.filter((row) => row.last_name.toLowerCase().includes(searchVal) || row.first_name.includes(searchVal) 
-      || row.middle_name.includes(searchVal) || row.email.toLowerCase().includes(searchVal))
+      const searchData = members.filter((row) => row.last_name.toLowerCase().includes(searchVal) || row.first_name.toLowerCase().includes(searchVal) 
+      || row.middle_name.toLowerCase().includes(searchVal) || row.email.toLowerCase().includes(searchVal) || row.student_number.includes(searchVal)) ;
       setFilterMem(searchData);
     }
     else{
