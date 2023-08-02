@@ -2,7 +2,7 @@ import {addMember, importCSV, getAllMembers, editMember, deleteMember, getMember
 import {login, checkIfLoggedIn} from "./controllers/login-auth-controller.js";
 import { changePassword } from "./controllers/admin-account-controller.js";
 import { addElection, getElections, getElectionById, addPosition, getPositions,editElection} from "./controllers/admin-election-controller.js";
-import { addCandidate, upload, getCandidates, getMembersNotCandidate} from "./controllers/admin-candidates-controller.js";
+import { addCandidate, upload, getAllCandidates, getMembersNotCandidate, getCandidatesInElection, getCandidatesPerPosition} from "./controllers/admin-candidates-controller.js";
 const setUpRoutes = (app) => {
   //to change
   app.get("/", (req, res) => {
@@ -29,8 +29,10 @@ const setUpRoutes = (app) => {
 
   app.post("/add-candidate", upload.single("gpoa"), addCandidate);
   app.post("/get-mem-id-by-name", getMemberIdByName);
-  app.get("/get-candidates", getCandidates);
+  app.get("/get-candidates", getAllCandidates);
   app.post("/get-members-not-candidate", getMembersNotCandidate);
+  app.post("/get-candidates-election", getCandidatesInElection);
+  app.post("/get-candidates-per-position", getCandidatesPerPosition);
 }
 
 export default setUpRoutes;

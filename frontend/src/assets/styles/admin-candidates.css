@@ -49,13 +49,12 @@ select option {
     overflow:hidden; 
     white-space:nowrap; 
     text-overflow:ellipsis; 
+    
+    width: fit-content;
     max-width:200px; 
-    margin: 0px;
+    margin: auto;
 }
 
-.card-title.h5{
-    margin-right: 0px;
-}
 
 .candidate-profile{
     width: 90px;
@@ -84,7 +83,13 @@ select option {
     display: flex;
     flex-direction: column;
     align-self: center;
+    justify-content: center;
     padding: 0px;
     border: 0%;
     margin-bottom: 15px;
+}
+
+.no-candidates{
+    padding-top: 10vw;
+    width: 100%
 }

@@ -20,13 +20,14 @@ function AdminCandidate() {
   const [selectElection, setSelectElection] = useState(""); //selected election
   const [electionId, setElectionId] = useState() //id of selected election
   const [positions, setPositions] = useState([]); //array of positions of selected election
-  const [selectPosition, setSelectPosition] = useState(""); 
-  const [positionId, setPositionId] = useState();
-  const [candidates, setCandidates] = useState([]);
-
+  const [selectPosition, setSelectPosition] = useState(""); //selected position
+  const [positionId, setPositionId] = useState(); //id of selected position
+  const [candidates, setCandidates] = useState([]); //candidates
   const [add, setAdd] = useState(false);
 
   const addInputChecker = selectElection === "" || selectPosition === ""; //if not selected "add candidate" btn is disabled
+
+  
 
   useEffect(() => {
     fetch('http://localhost:3001/get-elections')
@@ -47,14 +48,86 @@ function AdminCandidate() {
       .then(response => response.json())
       .then(body => {
         setPositions(body)
+        // updatePostions()
       });
 
-      
-  }, [selectElection, selectPosition]);
+      if(selectElection === "" || selectElection === undefined)
+      {
+        fetch('http://localhost:3001/get-candidates')
+        .then(response => response.json())
+        .then(body => {
+          setCandidates(body);
+        });
+      }
+      else
+      {
+          if(positionId == undefined)
+          {
+            fetch('http://localhost:3001/get-candidates-election',{
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                election_id: electionId
+              }) 
+            })
+            .then(response => response.json())
+            .then(body => {
+              setCandidates(body);
+            });
+          }
+          else
+          {
+            fetch('http://localhost:3001/get-candidates-per-position',{
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                position: positionId
+              }) 
+            })
+            .then(response => response.json())
+            .then(body => {
+              setCandidates(body);
+            });
+          }
+      }
+  },[candidates]);
+
+  // [candidates, selectElection, positions]
 
 
  const showAdd = () => setAdd(true);
  const closeAdd = () => setAdd(false);
+
+ const getPositionNames = (positions) => {
+  if(positions === undefined) return ["None"]
+  else
+  {
+    const positionNames = []
+
+    for (let i = 0; i < positions.length; i++)
+    {
+      positionNames.push(positions[i].position_name.toUpperCase())
+    }
+
+    return positionNames
+  }
+}
+
+const getPositionId = (name) => {
+  if(name !=="")
+  {
+    for(let i = 0; i < positions.length; i++)
+    {
+      if(name.toLowerCase() === positions[i].position_name) 
+      {setPositionId(positions[i]._id)}
+    }
+  }
+
+}
 
 //gets name of election from array of object
   const getElectionNames = (elections) => {
@@ -79,6 +152,13 @@ function AdminCandidate() {
     }
   }
 
+
+
+  const handleSelectPosition = (e) => {
+    setSelectPosition(e.target.value);
+    getPositionId(e.target.value);
+  }
+
 //get if of the selected election
   const getElectionId = (name) => {
     if(name !=="")
@@ -92,43 +172,14 @@ function AdminCandidate() {
   }
 
   const handleSelectElection = (e) => {
-    console.log(e.target.value)
     setSelectElection(e.target.value);
-    getElectionId(e.target.value);
+    getElectionId(e.target.value); 
+
+    //reset
+    setSelectPosition("");
+    setPositionId(null)
   }
 
- 
-  const getPositionNames = (positions) => {
-    if(positions === undefined) return ["None"]
-    else
-    {
-      const positionNames = []
-
-      for (let i = 0; i < positions.length; i++)
-      {
-        positionNames.push(positions[i].position_name.toUpperCase())
-      }
-
-      return positionNames
-    }
-  }
-
-  const getPositionId = (name) => {
-    if(name !=="")
-    {
-      for(let i = 0; i < positions.length; i++)
-      {
-        if(name.toLowerCase() === positions[i].position_name) 
-        {setPositionId(positions[i]._id)}
-      }
-    }
-  }
-
-  const handleSelectPosition = (e) => {
-    console.log(e.target.value)
-    setSelectPosition(e.target.value);
-    getPositionId(e.target.value);
-  }
 
   return (
      <div id="main">
@@ -142,7 +193,7 @@ function AdminCandidate() {
               <div className="admin-page-header d-flex flex-column">
                 <div className="candidate-selectors d-flex gap-4 flex-wrap"> 
                   <SelectInput data={getElectionNames(elections)} label="Election Name" id="election-selector" onChange={handleSelectElection} value={selectElection === null ? ("") :(selectElection)}/>
-                  <SelectInput data={getPositionNames(positions)} label="Position" id="position-selector" onChange={handleSelectPosition} value={selectPosition === null ? ("") :(selectPosition)}/>
+                  <SelectInput data={getPositionNames(positions)} label="Position" id="position-selector" onChange={handleSelectPosition } value={selectPosition === null ? ("") :(selectPosition)}/>
                 </div>
                 <div className="sub-header d-flex flex-wrap justify-content-between">
                     <div className="sub-header-left d-flex gap-3">
@@ -154,14 +205,12 @@ function AdminCandidate() {
               </div>
               {/* cards */}
               <div className="candidate-cards d-flex flex-wrap gap-3">
-                <CandidateCard/>
-                <CandidateCard/>
-                <CandidateCard/>
-                <CandidateCard/>
-                <CandidateCard/>
-                <CandidateCard/>
-                <CandidateCard/>
-                <CandidateCard/>
+                {candidates.length === 0 ? (<div className="no-candidates d-flex justify-content-center text-secondary"> No Candidates. </div>) : 
+              ( candidates.map((mem, index) => (
+
+                <CandidateCard key={index} name={mem.first_name + " " + mem.last_name} email={mem.email}/>
+              )) 
+              )}
               </div>
 
               {/* modal */}

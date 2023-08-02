@@ -4,10 +4,11 @@ import fs from "fs";
 import { ObjectId } from "mongodb";
 
 
-import {ElectionSchema } from "../models/election.js";
+import {Election, ElectionSchema } from "../models/election.js";
 import {PositionSchema } from "../models/position.js";
 import { CandidateSchema } from "../models/candidate.js";
 import { UserSchema } from "../models/user.js";
+import { cachedDataVersionTag } from "v8";
 
 
 const Position = mongoose.model("Position", PositionSchema );
@@ -56,11 +57,82 @@ const addCandidate = async (req,res) => {
     }
 }
 
-const getCandidates = async (req,res) => {
+const getAllCandidates = async (req,res) => { //get members that are candidates
     try
     {
         const candidates = await Candidate.find({});
-        res.send(candidates);
+        const members = await User.find({});
+        const candidateMembers = [];
+
+        for(let i = 0; i < candidates.length; i++){
+            for(let y = 0; y < members.length; y++)
+            {
+                if(JSON.stringify(candidates[i].member_id) == JSON.stringify(members[y]._id))
+                {
+                    candidateMembers.push(members[y]);
+                }
+            }
+        }
+
+        res.send(candidateMembers)
+        
+    }
+    catch(err)
+    {
+        console.log(err);
+        res.send(err);
+    }
+}
+
+const getCandidatesInElection = async (req, res) => {
+    try
+    {
+        const position = await Position.find({election_id: req.body.election_id});
+        const candidates = await Candidate.find({});
+        
+        const candidateMembers = [];
+
+        for(let i = 0; i < position.length; i++){
+            for(let y = 0; y < candidates.length; y++)
+            {
+                if(JSON.stringify(candidates[y].position) == JSON.stringify(position[i]._id))
+                {
+                    const member = await User.find({_id: candidates[y].member_id});
+                    candidateMembers.push(member[0]);
+                }
+            }
+        }
+
+        res.send(candidateMembers)
+        
+    }
+    catch(err)
+    {
+        console.log(err);
+        res.send(err);
+    }
+}
+
+const getCandidatesPerPosition = async (req, res) => {
+    try
+    {
+        const candidates = await Candidate.find({position: req.body.position});
+        const members = await User.find({})
+        
+        const candidateMembers = [];
+
+        for(let i = 0; i < candidates.length; i++){
+            for(let y = 0; y < members.length; y++)
+            {
+                if(JSON.stringify(candidates[i].member_id) == JSON.stringify(members[y]._id))
+                {
+                    candidateMembers.push(members[y]);
+                }
+            }
+        }
+
+        res.send(candidateMembers)
+        
     }
     catch(err)
     {
@@ -84,7 +156,6 @@ const getMembersNotCandidate = async(req, res) => { //members
                 }
             }
         }
-        
         res.send(membersNotCandidates)
     
     }
@@ -96,4 +167,4 @@ const getMembersNotCandidate = async(req, res) => { //members
 
 
 
-export {addCandidate, upload, getCandidates, getMembersNotCandidate};
+export {addCandidate, upload, getAllCandidates, getMembersNotCandidate, getCandidatesInElection, getCandidatesPerPosition};
