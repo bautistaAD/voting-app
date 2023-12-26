@@ -20,18 +20,9 @@ const EditElectionModal = (prop) => {
     const [type, setType] = useState();
     const [inputChecker, setInputChecker] = useState(true);
 
-    const handleName = (e) => {
-      setName(e.target.value)
-      setInputChecker(true)
-    };
-    const handleStart = (e) => {
-      setStart(e.target.value)
-      setInputChecker(true)
-    };
-    const handleEnd = (e) => {
-      setEnd(e.target.value)
-      setInputChecker(true)
-    };
+    const handleName = (e) => setName(e.target.value);
+    const handleStart = (e) => setStart(e.target.value);
+    const handleEnd = (e) => setEnd(e.target.value);
     const handleType = (e) => setType(e.target.value);
     const handleClose = (e) => {
       close()
