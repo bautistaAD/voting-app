@@ -18,6 +18,7 @@ const EditElectionModal = (prop) => {
     const [start, setStart] = useState();
     const [end, setEnd] = useState();
     const [type, setType] = useState();
+    const [inputChecker, setInputChecker] = useState(true);
 
     const handleName = (e) => setName(e.target.value);
     const handleStart = (e) => setStart(e.target.value);
@@ -74,7 +75,15 @@ const EditElectionModal = (prop) => {
         setEnd(displayDateConverter(details.end_date_time));
         setType(details.type);
       }
-    }, [prop.details])
+
+      if(start < end) // checks if start time and end time is valid
+      {
+        setInputChecker(false)
+      }
+      else{
+        setInputChecker(true)
+      }
+    }, [prop.details, end, start, inputChecker])
 
     const showToast = (success, message) => {
         if(success)
@@ -127,7 +136,7 @@ const EditElectionModal = (prop) => {
                 <ModalDateTimeInput label={"End Time"} value={end} onChange={handleEnd}/>
                 <SelectInput label={"Election Type"} id="edit-type" data={selectData} value={type} onChange={handleType}/>
                 {/* onClick={handleAdd}  inputChecker={inputChecker} */}
-                <ModalButtons name={"Save"} close={handleClose} onClick={()=> {handleSave()}}/>
+                <ModalButtons name={"Save"} close={handleClose} onClick={()=> {handleSave()}} inputChecker={inputChecker}/>
 
             </Modal.Body> 
         </Modal>
