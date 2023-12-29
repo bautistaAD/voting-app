@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer, toast} from 'react-toastify';
 
 const AddMemberModal = (prop) => {
+    const keyValue = prop.keyValue;
+    const setKey = prop.setKey;
     const show = prop.show;
     const close = prop.close;
     const data = ["Candidate", "Non-Candidate"];
@@ -76,6 +78,7 @@ const AddMemberModal = (prop) => {
         if(body.success)
         {
           showToast(true, body.message)
+          setKey(keyValue+1)
           close();
         }
         else
