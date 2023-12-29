@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import multer from "multer";
-import fs from "fs";
+import fs, { fdatasync } from "fs";
 import { ObjectId } from "mongodb";
 
 
@@ -69,7 +69,10 @@ const getAllCandidates = async (req,res) => { //get members that are candidates
             {
                 if(JSON.stringify(candidates[i].member_id) == JSON.stringify(members[y]._id))
                 {
-                    candidateMembers.push(members[y]);
+                    if(!candidateMembers.includes(members[y]))
+                    {
+                        candidateMembers.push(members[y]);
+                    }
                 }
             }
         }
@@ -99,11 +102,13 @@ const getCandidatesInElection = async (req, res) => {
                 {
                     const member = await User.find({_id: candidates[y].member_id});
                     candidateMembers.push(member[0]);
+                    break; 
                 }
             }
         }
 
-        res.send(candidateMembers)
+        const uniqueCandidates = Array.from(new Set(candidateMembers));
+        res.send(candidateMembers);
         
     }
     catch(err)
@@ -126,7 +131,11 @@ const getCandidatesPerPosition = async (req, res) => {
             {
                 if(JSON.stringify(candidates[i].member_id) == JSON.stringify(members[y]._id))
                 {
-                    candidateMembers.push(members[y]);
+                    if(!candidateMembers.includes(members[y]))
+                    {
+                        candidateMembers.push(members[y]);
+                    }
+                    
                 }
             }
         }
@@ -165,6 +174,61 @@ const getMembersNotCandidate = async(req, res) => { //members
     }
 }
 
+const deleteManyCandidate = async(req, res) => {
+    try
+    {
+        const findDelCandidate = await Candidate.find({member_id: req.body.member_id});
+        const deleteCandidate = await Candidate.deleteMany({member_id: req.body.member_id})
+        if (deleteCandidate.deletedCount > 0) 
+        {
+            
+            for(let i=0; i<findDelCandidate.length; i++)
+            {
+                const path = findDelCandidate[i].gpoa.path
+                fs.unlinkSync(path)
+            }
+            res.send({ success: true, message: "Deleted successfully"})
+        } 
+        else 
+        { 
+            res.send({ success: false, message: "An error occured" })
+        }
+
+    }
+    catch(err)
+    {
+        console.log(err)
+    }
+}
+
+// const deleteCandiateByElection = async(req,res) => {
+//     try
+//     {
+//         const findCandidateElection = await Position.find({election_id: req.body.election_id})
+//         const findDelCandidate = await Candidate.find({member_id: req.body.member_id});
+//         const deleteCandidate = await Candidate.deleteMany({member_id: req.body.member_id})
+//         if (deleteCandidate.deletedCount > 0) 
+//         {
+            
+//             for(let i=0; i<findDelCandidate.length; i++)
+//             {
+//                 const path = findDelCandidate[i].gpoa.path
+//                 fs.unlinkSync(path)
+//             }
+//             res.send({ success: true, message: "Deleted successfully"})
+//         } 
+//         else 
+//         { 
+//             res.send({ success: false, message: "An error occured" })
+//         }
+
+//     }
+//     catch(err)
+//     {
+//         console.log(err)
+//     }
+// }
 
 
-export {addCandidate, upload, getAllCandidates, getMembersNotCandidate, getCandidatesInElection, getCandidatesPerPosition};
+
+export {addCandidate, upload, getAllCandidates, getMembersNotCandidate, getCandidatesInElection, getCandidatesPerPosition, deleteManyCandidate};
