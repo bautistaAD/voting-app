@@ -5,8 +5,95 @@
 .main-active, .main-inactive {
     transition: margin-left .2s;
     padding: 16px;
+    display: flex;
+
+    .dashboard-base{
+        justify-content: center;
+    }
   }
 
 .main-active{
     margin-left: 250px;
+    .dashboard-base{
+        width: 80vw;
+    }
+}
+
+
+
+.dashboard{
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.dashboard-left{
+    width: 70vw;
+    height: auto;
+    background-color: aqua;
+
+}
+
+.dashboard-left-top{
+    display: flex;
+    gap: 10px;
+}
+
+.dashboard-right{
+    width: 25vw;
+    height: auto;
+    background-color: red;
+}
+
+
+.dashboard-base{
+    width: 90vw;
+    height: 86vh;
+    display: flex;
+    gap: 15px;
+
+}
+
+/*Dashboard compponents*/
+.dashboard-card-icon{
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.icon-blue{
+    background-color: #DEF4F6;
+}
+
+.icon-orange{
+    background-color: #FFEEDD;
+}
+
+.dashboard-card-base{
+    width: 15vw;
+    height: 35vh;
+
+    background-color: white;
+    border-top: 3px solid var(--border-color);
+
+    justify-content: center;
+    align-items: center;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-card-icon img{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.dashboard-card-count{
+    margin: 0%;
+    margin-top: 5px;
+    font-weight: bold;
+
 }
