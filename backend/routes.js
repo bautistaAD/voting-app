@@ -34,9 +34,6 @@ const setUpRoutes = (app) => {
   app.post("/get-members-not-candidate", getMembersNotCandidate);
   app.post("/get-candidates-election", getCandidatesInElection);
   app.post("/get-candidates-per-position", getCandidatesPerPosition);
-
-  app.get("/get-members-count", getMemberCount);
-  app.get("/get-election-count", getElectionCount);
 }
 
 export default setUpRoutes;

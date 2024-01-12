@@ -8,7 +8,7 @@ const CardButton = (prop) => {
 
   return (
     <div> 
-        <Button className="card-button btn btn-outline-dark" >{btnName}</Button>
+        <Button className="card-button btn btn-outline-dark" onClick={onClick} >{btnName}</Button>
     </div>
   )
 }

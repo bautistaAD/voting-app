@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import {ToastContainer, toast} from 'react-toastify';
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import AdminSidebarData from '../components/admin-sidebar-data';
@@ -10,6 +11,7 @@ import AddIcon from '@mui/icons-material/Add';
 import HeaderBtnGray from "../components/buttons/header-btn-gray";
 import SortOutlinedIcon from '@mui/icons-material/SortOutlined';
 import AddCandidateModal from "../components/modals/add-candidates-modal";
+import DeletePrompt from "../components/modals/delete-prompt";
 import CandidateCard from "../components/cards";
 
 function AdminCandidate() {
@@ -26,6 +28,8 @@ function AdminCandidate() {
   const [sort, setSort] = useState("");
   const [search, setSearch] = useState("");
   const [add, setAdd] = useState(false);
+  const [del, setDelete] = useState(false);
+  const [memId, setMemId] = useState("");
 
   const addInputChecker = selectElection === "" || selectPosition === ""; //if not selected "add candidate" btn is disabled
 
@@ -114,8 +118,14 @@ function AdminCandidate() {
       }
   },[candidates]);
 
- const showAdd = () => setAdd(true);
- const closeAdd = () => setAdd(false);
+  const showAdd = () => setAdd(true);
+  const closeAdd = () => setAdd(false);
+  const closeDel = () => setDelete(false);
+  const showDel = (memberId) => {
+    setDelete(true);
+    setMemId(memberId)
+  }
+ 
 
  const getPositionNames = (positions) => {
   if(positions === undefined) return ["None"]
@@ -207,6 +217,62 @@ const getPositionId = (name) => {
     setSearch(e.target.value)
   }
 
+  const showToast = (success, message) => {
+    if(success)
+    {
+      
+      toast.success(message, {
+        className: 'toast-message',
+        theme: "colored"
+      })
+    }
+    else
+    {
+      toast.error(message, {
+        className: 'toast-message',
+        theme: "colored"
+      })
+  
+    }
+  }
+
+  const handleDel = () => {
+    //if both election and position dropdown is empty or position ONLY is empty
+    if(selectElection === "" || selectElection === undefined)
+    {
+      fetch('http://localhost:3001/delete-many-candidate',{
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                member_id: memId
+              }) 
+            })
+            .then(response => response.json())
+            .then(body => {
+              showToast(body.success, body.message);
+            });
+    }
+    //if election has value
+    else
+    {
+      if(positionId == undefined)
+      {
+
+      }
+      //if both dropdown has values
+      else
+      {
+
+      }
+    }
+    closeDel()
+    
+
+  }
+
+
 
   return (
      <div id="main">
@@ -247,7 +313,8 @@ const getPositionId = (name) => {
                       return fullName.toLowerCase().includes(search.toLowerCase()) || mem.email.toLowerCase().includes(search.toLowerCase());
                     })
                     .map((mem, index) => (
-                      <CandidateCard key={index} name={`${mem.first_name} ${mem.last_name}`} email={mem.email} />
+                      // del={() => handleDel(mem._id)}
+                      <CandidateCard key={index} name={`${mem.first_name} ${mem.last_name}`} email={mem.email} del={() => showDel(mem._id)}/> 
                     ))
                 )}
                 
@@ -262,7 +329,7 @@ const getPositionId = (name) => {
 
               {/* modal */}
               <AddCandidateModal show={add} close={closeAdd} posId={positionId} />
-              
+              <DeletePrompt show={del} close={closeDel} setDel={handleDel}/>
             </div>
           </div>
         </div>
