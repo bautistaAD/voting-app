@@ -21,6 +21,16 @@
     .dashboard-candidate-base{
         width: 30vw;
     }
+
+    .dashboard-candidate-header select{
+        width: 15vw;
+    }
+    .dashboard-candidate-card-base{
+        width: 12rem;
+    }
+    .dashboard-candidate-name{
+        width: 120px;
+    }
 }
 
 

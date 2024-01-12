@@ -69,7 +69,7 @@ function AdminDashboard() {
                 <div className="dashboard-left-top">
                   <DashboardCard png={membersPng} name={"Current Members"} count={memberCount} iconClass={"dashboard-card-icon icon-blue rounded-circle"}/>
                   <DashboardCard png={electionPng} name={"Elections"} count={electionCount} iconClass={"dashboard-card-icon icon-orange rounded-circle"}/>
-                  <DashboardCandidate data={getElectionNames(elections)}/>
+                  <DashboardCandidate elections={elections} electionNames={getElectionNames(elections)}/>
                 </div>
             </div>
             <div className="dashboard dashboard-right">
