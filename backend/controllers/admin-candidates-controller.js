@@ -88,35 +88,38 @@ const getAllCandidates = async (req,res) => { //get members that are candidates
 }
 
 const getCandidatesInElection = async (req, res) => {
-    try
-    {
-        const position = await Position.find({election_id: req.body.election_id});
+    try {
+        const position = await Position.find({ election_id: req.body.election_id });
         const candidates = await Candidate.find({});
         
-        const candidateMembers = [];
+        const candidateMembersSet = new Set();
 
-        for(let i = 0; i < position.length; i++){
-            for(let y = 0; y < candidates.length; y++)
-            {
-                if(JSON.stringify(candidates[y].position) == JSON.stringify(position[i]._id))
-                {
-                    const member = await User.find({_id: candidates[y].member_id});
-                    candidateMembers.push(member[0]);
-                    break; 
+        for (let i = 0; i < position.length; i++) {
+            for (let y = 0; y < candidates.length; y++) {
+                if (JSON.stringify(candidates[y].position) == JSON.stringify(position[i]._id)) {
+                    const member = await User.findOne({ _id: candidates[y].member_id });
+
+                    // Check if the member is not already in the set
+                    if (!candidateMembersSet.has(member._id.toString())) {
+                        candidateMembersSet.add(member._id.toString());
+                    }
                 }
             }
         }
 
-        const uniqueCandidates = Array.from(new Set(candidateMembers));
-        res.send(candidateMembers);
-        
-    }
-    catch(err)
-    {
+        // Convert the set back to an array
+        const candidateMembers = Array.from(candidateMembersSet);
+
+        // Retrieve the user objects based on the unique IDs
+        const uniqueCandidates = await User.find({ _id: { $in: candidateMembers } });
+
+        res.send(uniqueCandidates);
+    } catch (err) {
         console.log(err);
         res.send(err);
     }
-}
+};
+
 
 const getCandidatesPerPosition = async (req, res) => {
     try
@@ -131,11 +134,7 @@ const getCandidatesPerPosition = async (req, res) => {
             {
                 if(JSON.stringify(candidates[i].member_id) == JSON.stringify(members[y]._id))
                 {
-                    if(!candidateMembers.includes(members[y]))
-                    {
-                        candidateMembers.push(members[y]);
-                    }
-                    
+                    candidateMembers.push(members[y]);
                 }
             }
         }
