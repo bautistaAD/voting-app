@@ -6,7 +6,7 @@ const DashboardCard = (prop) => {
   const count = prop.count
   const iconClass = prop.iconClass
     return (
-      <div className="dashboard-card-base shadow mb-5 bg-body rounded">
+      <div className="dashboard-card-base shadow mb-2 bg-body rounded">
         <div className={iconClass}>
           <img src={png} className="dashboard-card-image" alt="none"></img>
         </div>

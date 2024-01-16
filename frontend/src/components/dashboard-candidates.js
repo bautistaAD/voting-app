@@ -55,7 +55,7 @@ const DashboardCandidate = (props) => {
   },[candidates])
 
     return (
-      <div className="dashboard-candidate-base shadow mb-5 bg-body rounded">
+      <div className="dashboard-candidate-base shadow mb-2 bg-body rounded">
         <div className="dashboard-candidate-header">
           <div className="dashboard-candidate-title">Candidates</div>
           <SelectInput data={electionNames} onChange={handleSelectElection} value={selectElection === null ? ("") :(selectElection)}/>

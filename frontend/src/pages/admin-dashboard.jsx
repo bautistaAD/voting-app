@@ -8,6 +8,7 @@ import DashboardCard from "../components/dashboard-card";
 import DashboardCandidate from "../components/dashboard-candidates";
 import membersPng from "../assets/images/group.png";
 import electionPng from "../assets/images/election.png";
+import DashboardElection from "../components/dashboard-election";
 
 function AdminDashboard() {
   const [sidebar, setSidebar] = useState("inactive");
@@ -71,6 +72,7 @@ function AdminDashboard() {
                   <DashboardCard png={electionPng} name={"Elections"} count={electionCount} iconClass={"dashboard-card-icon icon-orange rounded-circle"}/>
                   <DashboardCandidate elections={elections} electionNames={getElectionNames(elections)}/>
                 </div>
+                <DashboardElection/>
             </div>
             <div className="dashboard dashboard-right">
 
