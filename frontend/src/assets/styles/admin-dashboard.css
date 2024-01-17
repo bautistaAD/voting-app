@@ -5,8 +5,249 @@
 .main-active, .main-inactive {
     transition: margin-left .2s;
     padding: 16px;
+    display: flex;
+
+    .dashboard-base{
+        justify-content: center;
+    }
   }
 
 .main-active{
     margin-left: 250px;
+    .dashboard-base{
+        width: 80vw;
+    }
+
+    .dashboard-candidate-base{
+        width: 30vw;
+    }
+
+    .dashboard-candidate-header select{
+        width: 15vw;
+    }
+    .dashboard-candidate-card-base{
+        width: 12rem;
+    }
+    .dashboard-candidate-name{
+        width: 120px;
+    }
 }
+
+
+
+.dashboard{
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.dashboard-left{
+    width: 70vw;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-left-top{
+    display: flex;
+    gap: 10px;
+}
+
+.dashboard-right{
+    width: 25vw;
+    height: auto;
+    background-color: red;
+}
+
+
+.dashboard-base{
+    width: 90vw;
+    height: 86vh;
+    display: flex;
+    gap: 15px;
+
+}
+
+/*Dashboard compponents*/
+.dashboard-card-icon{
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.icon-blue{
+    background-color: #DEF4F6;
+}
+
+.icon-orange{
+    background-color: #FFEEDD;
+}
+
+.dashboard-card-base{
+    width: 15vw;
+    height: 35vh;
+
+    background-color: white;
+    border-top: 3px solid var(--border-color);
+    
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-overflow: ellipsis;
+}
+
+.dashboard-card-icon img{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.dashboard-card-count{
+    margin: 0%;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.dashboard-candidate-base{
+    margin: 0%;
+    padding: 10px;
+    width: 35vw;
+    height: 35vh;
+
+    background-color: white;
+    border-top: 3px solid var(--border-color);
+
+    overflow-y: scroll;
+}
+
+.dashboard-candidate-header, .dashboard-election-header{
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-election-header{
+    padding-bottom: 10px;
+}
+
+.dashboard-candidate-header select{
+    width: 20vw;
+    height: 35px;
+}
+
+.dashboard-candidate-title{
+    padding: 5px 0 5px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.dashboard-candidate-card-base{
+    height: 3rem;
+    width: 10rem;
+    /* background-color: blue; */
+    border: 2px solid;
+    border-color: #C1C4C5;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 5px;
+    
+}
+
+.dashbooard-candidate-profile{
+    height: 35px;
+    width: 35px;
+    background-color: gray;
+}
+
+.dashboard-candidate-name{
+    width: 100px;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+}
+
+/* dashboard table election */
+.dashboard-election-base{
+    width: auto;
+    height: 100vh;
+    border-top: 3px solid var(--border-color);
+    padding: 10px;
+}
+.dashboard-election-title{
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.switch-3 {
+    display: flex;
+    position: relative;
+    height: 40px;
+    width: 25vw;
+    cursor: pointer;
+    border-radius: 15px;
+    overflow: hidden;
+
+    background-color: #D9D9D9;
+    padding: 4px;
+  }
+  
+  .switch-3-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 33.33%;
+    box-sizing: border-box;
+    color: black;
+    border-radius: 10px;
+  }
+  
+.switch-state-active{
+    background-color: #07223E;
+    transition: background-color 0.3s linear;
+    color: white;
+}
+
+.dashboard-election-table-base {
+    border: 2px solid var(--dark-gray);
+    padding: 10px;
+    margin: 0px !important;
+    margin-top: 15px !important;
+ 
+}
+
+.table-responsive{
+    max-height: 250px;
+}
+
+.dashboard-date-base{
+    background-color: #10C5C6;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard-date-base > h2 {
+    margin: 0px;
+}
+
+.table td{
+    vertical-align: middle;
+}
+
+
+  

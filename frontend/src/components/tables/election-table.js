@@ -71,7 +71,7 @@ const ElectionTable = (prop) => {
       <div className="d-flex justify-content-evenly">
         {/* onClick={showEditModal} */}
         <button className="btn btn-success d-flex align-items-center justify-content-center" style={{width: "fit-content", height: "30px", fontSize:"1vw"}} 
-        onClick={()=> {navigate(`/election-details/${row._id}`, {state: {status: status, name: row.election_name}})}} >
+        onClick={()=> {navigate(`/election-details/${row._id}`, {state: {status: status, name: row.election_name, from: `/admin-election`}})}} >
          View Details
         </button>
       </div>

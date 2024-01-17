@@ -23,6 +23,7 @@ const ElectionDetails = () => {
     const location = useLocation();
     const navigate = useNavigate();
     let initialStatus = location.state.status;  // get state
+    let fromPage = location.state.from;
     const [status, setStatus] = useState(initialStatus)
 
     let {id} = useParams();
@@ -81,7 +82,7 @@ const ElectionDetails = () => {
         <Sidebar sidebar={sidebar} sideData={AdminSidebarData}></Sidebar>
         <div className={main}  id="admin-election-main" style={{marginTop:"60px"}}>
           <div className='main-inner'>
-            <div className='back-btn' onClick={()=>{navigate(`/admin-election`)}}>
+            <div className='back-btn' onClick={()=>{navigate(fromPage)}}>
                 <ArrowBackIosIcon/>
                 {"Back"}
             </div>
