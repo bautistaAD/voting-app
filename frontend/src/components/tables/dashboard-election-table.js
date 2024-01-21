@@ -18,9 +18,21 @@ const DashboardElectionTable = (prop) => {
         });
       }
       else if(filter == "ongoing"){
-
+        fetch('http://localhost:3001/get-ongoing-elections')
+        .then(response => response.json())
+        .then(body => {
+          setElections(body);
+        });
       }
-    });
+      else
+      {
+        fetch('http://localhost:3001/get-upcoming-elections')
+        .then(response => response.json())
+        .then(body => {
+          setElections(body);
+        });
+      }
+    }, [filter]);
 
   //generates status
   const electionStatusGenerator = (start, end) => {
@@ -53,17 +65,33 @@ const DashboardElectionTable = (prop) => {
     );
   };
 
+  //identifies if the date of election is already done
+  const dateIdentifier = (start, end) => {
+    const current = new Date();
+    
+    if(start < current && end <current )
+    {
+        return("dashboard-date-base-inactive");
+    }
+    else
+    {
+      return("dashboard-date-base-active");
+    }
+  }
+
   //column header of the table
   const columns = [
     {dataField: 'date', text: '', headerAttrs: {hidden: true}, style: {'width' : '100px'},
       formatter: (cell, row) =>{
         const dayNames = ["SUN","MON", "TUE", "WED", "THU", "FRI", "SAT"];
-        const originalDate = new Date(row.end_date_time);
-        const day = String(originalDate.getDate()).padStart(2, '0');
-        const weekday = String(originalDate.getDay())
+        const start = new Date(row.start_date_time);
+        const end = new Date(row.end_date_time);
+        const day = String(start.getDate()).padStart(2, '0');
+        const weekday = String(start.getDay())
+        const color = dateIdentifier(start, end);
 
         return(
-          <div className="dashboard-date-base ">
+          <div className={`${color}`}>
             <h2>{`${day}`}</h2>
             <div>{`${dayNames[weekday]}`}</div>
           </div>
