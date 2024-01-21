@@ -233,15 +233,24 @@
     max-height: 250px;
 }
 
-.dashboard-date-base{
-    background-color: #10C5C6;
+.dashboard-date-base-active, .dashboard-date-base-inactive{
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.dashboard-date-base > h2 {
+.dashboard-date-base-active{
+    background-color: #10C5C6;
+
+}
+
+.dashboard-date-base-inactive{
+    background-color: #7F7F7F;
+    color: white
+}
+
+.dashboard-date-base-active > h2, .dashboard-date-base-inactive> h2 {
     margin: 0px;
 }
 

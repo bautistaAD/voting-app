@@ -28,4 +28,59 @@ const getElectionCount = async (req,res) => {
         console.log(err);
     }
 }
-export {getMemberCount, getElectionCount}
+
+const getOngoingElection  = async (req,res) => {
+    try
+    {
+        const elections = await Election.find({});
+        const onGoingElections = []
+        const current = new Date();
+
+        for(let i = 0; i < elections.length; i++)
+        {
+            const start = elections[i].start_date_time;
+            const end = elections[i].end_date_time;
+
+            if(start < current && current < end)
+            {
+                onGoingElections.push(elections[i]);
+            }
+        }
+        res.send(onGoingElections);
+
+    }
+    catch(err)
+    {
+        console.log(err)
+        res.send({success: false, message: "An error occured"});
+    }
+}
+
+const getUpcomingElection  = async (req,res) => {
+    try
+    {
+        const elections = await Election.find({});
+        const upcomingElections = []
+        const current = new Date();
+
+        for(let i = 0; i < elections.length; i++)
+        {
+            const start = elections[i].start_date_time;
+            const end = elections[i].end_date_time;
+
+            if(current < start && current < end)
+            {
+                upcomingElections.push(elections[i]);
+            }
+        }
+        res.send(upcomingElections);
+
+    }
+    catch(err)
+    {
+        console.log(err)
+        res.send({success: false, message: "An error occured"});
+    }
+}
+
+export {getMemberCount, getElectionCount, getOngoingElection, getUpcomingElection}
